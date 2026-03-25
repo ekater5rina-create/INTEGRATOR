@@ -1,584 +1,589 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Terminal, 
-  Send, 
-  FileSpreadsheet, 
-  Github, 
-  Triangle, 
-  Code2, 
-  Bot, 
-  BarChart3, 
-  Layout, 
-  ChevronRight,
-  CheckCircle2,
-  ChevronLeft,
-  Menu,
-  X
-} from 'lucide-react';
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Integrator | Портфолио</title>
+    
+    <!-- Подключаем Tailwind CSS для стилей -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Подключаем иконки Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-export default function App() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [formStatus, setFormStatus] = useState('idle'); // idle, submitting, success
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [touchStart, setTouchStart] = useState(null);
-  const [touchEnd, setTouchEnd] = useState(null);
+    <style>
+        html { scroll-behavior: smooth; }
+        ::selection { background-color: #B026FF; color: white; }
+        /* Скрываем скроллбар для карусели, если он появится */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="min-h-screen bg-[#0D0D0D] text-gray-300 font-sans">
 
-  // Обработка скролла для изменения шапки
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Имитация отправки формы
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setFormStatus('submitting');
-    setTimeout(() => {
-      setFormStatus('success');
-      setTimeout(() => setFormStatus('idle'), 5000); // Возврат к начальному состоянию через 5 сек
-    }, 1500);
-  };
-
-  const neonText = "text-[#39FF14]";
-  const neonBorder = "border-[#39FF14]";
-  const neonShadow = "hover:shadow-[0_0_20px_rgba(57,255,20,0.3)] hover:border-[#39FF14]";
-  const neonButton = "bg-[#39FF14] text-black font-bold hover:shadow-[0_0_25px_rgba(57,255,20,0.6)] transition-all duration-300";
-  const textPurple = "text-[#B026FF]";
-  const purpleShadow = "hover:shadow-[0_0_20px_rgba(176,38,255,0.3)] hover:border-[#B026FF]";
-
-  // Данные для карусели портфолио
-  const portfolioItems = [
-    {
-      id: 1,
-      title: "Лендинг для стартапа",
-      tags: ["Tilda", "Web Design", "Dark Theme"],
-      description: "Анимации по скроллу, 3D-элементы, сложная верстка в Zero Block и интеграция с формой сбора контактов.",
-      gradient: "from-[#39FF14]/40 to-[#0D0D0D]",
-      icon: <Layout size={64} className="text-[#39FF14]" />,
-      videoUrl: "https://kinescope.io/embed/wbF7ioMvJpgpR7Pd6jcbco"
-    },
-    {
-      id: 2,
-      title: "Корпоративный BI-Дашборд",
-      tags: ["Аналитика", "Data Viz", "Дашборд"],
-      description: "Профессиональная сводка для руководителей организации: визуализация ключевых показателей (KPI), мониторинг планов и авто-обновление метрик.",
-      gradient: "from-cyan-500/40 to-[#0D0D0D]",
-      icon: <BarChart3 size={64} className="text-cyan-400" />,
-      image: "https://i.yapx.ru/dO8BO.jpg"
-    },
-    {
-      id: 3,
-      title: "Бот-менеджер для бизнеса",
-      tags: ["Telegram API", "Интеграция"],
-      description: "Автоматическая обработка заявок, ответы на частые вопросы и маршрутизация клиентов прямо в мессенджере.",
-      gradient: "from-[#B026FF]/40 to-[#0D0D0D]",
-      icon: <Bot size={64} className="text-[#B026FF]" />,
-      image: "https://i.yapx.ru/dO7je.jpg"
-    },
-    {
-      id: 4,
-      title: "Умная CRM в таблицах",
-      tags: ["Google Sheets", "Аналитика"],
-      description: "Сводка KPI, авто-подсчет доходов/расходов и генерация красивых графиков для владельца бизнеса.",
-      gradient: "from-blue-500/40 to-[#0D0D0D]",
-      icon: <FileSpreadsheet size={64} className="text-blue-400" />,
-      image: "https://i.yapx.ru/dO7jg.jpg"
-    },
-    {
-      id: 5,
-      title: "Neon/Cyber UI Kit",
-      tags: ["Figma", "UI/UX"],
-      description: "Готовый набор кнопок, форм и карточек для быстрой сборки технологичных и стильных интерфейсов.",
-      gradient: "from-pink-500/40 to-[#0D0D0D]",
-      icon: <Code2 size={64} className="text-pink-500" />,
-      image: "https://i.yapx.ru/dO7jd.jpg"
-    }
-  ];
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev === portfolioItems.length - 1 ? 0 : prev + 1));
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? portfolioItems.length - 1 : prev - 1));
-  };
-
-  // Обработка свайпов для карусели на мобильных устройствах
-  const minSwipeDistance = 50;
-  const onTouchStart = (e) => {
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-  const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
-  const onTouchEndEvent = () => {
-    if (!touchStart || !touchEnd) return;
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
-    if (isLeftSwipe) nextSlide();
-    if (isRightSwipe) prevSlide();
-  };
-
-  return (
-    <div className="min-h-screen bg-[#0D0D0D] text-gray-300 font-sans selection:bg-[#B026FF] selection:text-white">
-      
-      {/* Навигация */}
-      <nav className={`fixed w-full z-50 transition-all duration-300 border-b ${isScrolled ? 'bg-[#0D0D0D]/90 backdrop-blur-md border-[#1A1A1A] py-4' : 'bg-transparent border-transparent py-6'}`}>
-        <div className="container mx-auto px-6 max-w-6xl flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <Terminal className={neonText} size={24} />
-            <span className="text-white font-bold text-xl tracking-wider">DIGITAL<span className={neonText}>_INTEGRATOR</span></span>
-          </div>
-          <div className="hidden md:flex gap-8 text-sm font-medium">
-            <a href="#services" className="hover:text-[#39FF14] transition-colors">Услуги</a>
-            <a href="#portfolio" className="hover:text-[#39FF14] transition-colors">Портфолио</a>
-            <a href="#cases" className="hover:text-[#39FF14] transition-colors">Кейсы</a>
-            <a href="#contact" className="hover:text-[#39FF14] transition-colors">Контакты</a>
-          </div>
-          <a href="https://t.me/Ekater5rina" target="_blank" rel="noopener noreferrer" className={`hidden md:block px-5 py-2 rounded-full border ${neonBorder} ${neonText} hover:bg-[#39FF14] hover:text-black transition-all duration-300 text-sm font-bold`}>
-            Связаться
-          </a>
-          
-          {/* Кнопка бургер-меню для мобилок */}
-          <button 
-            className="md:hidden text-gray-300 hover:text-[#39FF14] transition-colors"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
-        </div>
-        
-        {/* Выпадающее мобильное меню */}
-        <div className={`md:hidden absolute top-full left-0 w-full bg-[#0D0D0D]/95 backdrop-blur-xl border-b border-[#1A1A1A] transition-all duration-300 overflow-hidden ${isMobileMenuOpen ? 'max-h-96 py-6 opacity-100' : 'max-h-0 py-0 opacity-0'}`}>
-          <div className="flex flex-col gap-6 px-6">
-            <a href="#services" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium hover:text-[#39FF14] transition-colors">Услуги</a>
-            <a href="#portfolio" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium hover:text-[#39FF14] transition-colors">Портфолио</a>
-            <a href="#cases" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium hover:text-[#39FF14] transition-colors">Кейсы</a>
-            <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium hover:text-[#39FF14] transition-colors">Контакты</a>
-            <a href="https://t.me/Ekater5rina" target="_blank" rel="noopener noreferrer" className={`mt-2 py-4 rounded-lg text-center ${neonButton}`}>
-              Связаться в Telegram
+    <!-- Навигация -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 border-b bg-transparent border-transparent py-6">
+        <div class="container mx-auto px-6 max-w-6xl flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <i data-lucide="terminal" class="text-[#39FF14]"></i>
+                <span class="text-white font-bold text-xl tracking-wider">DIGITAL<span class="text-[#39FF14]">_INTEGRATOR</span></span>
+            </div>
+            <div class="hidden md:flex gap-8 text-sm font-medium">
+                <a href="#services" class="hover:text-[#39FF14] transition-colors">Услуги</a>
+                <a href="#portfolio" class="hover:text-[#39FF14] transition-colors">Портфолио</a>
+                <a href="#cases" class="hover:text-[#39FF14] transition-colors">Кейсы</a>
+                <a href="#contact" class="hover:text-[#39FF14] transition-colors">Контакты</a>
+            </div>
+            <a href="https://t.me/Ekater5rina" target="_blank" rel="noopener noreferrer" class="hidden md:block px-5 py-2 rounded-full border border-[#39FF14] text-[#39FF14] hover:bg-[#39FF14] hover:text-black transition-all duration-300 text-sm font-bold">
+                Связаться
             </a>
-          </div>
-        </div>
-      </nav>
-
-      {/* Блок 1: Hero-экран */}
-      <section className="relative pt-40 pb-20 md:pt-48 md:pb-32 overflow-hidden">
-        {/* Фоновые декорации */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#39FF14]/5 rounded-full blur-[100px] pointer-events-none"></div>
-        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-[#B026FF]/10 rounded-full blur-[80px] pointer-events-none"></div>
-        
-        <div className="container mx-auto px-6 max-w-6xl relative z-10 grid md:grid-cols-2 gap-12 items-center">
-          <div className="flex flex-col items-start gap-6">
-            <div className={`px-4 py-1 rounded-full border border-[#1A1A1A] bg-[#141414] text-xs font-mono flex items-center gap-2`}>
-              <div className="w-2 h-2 rounded-full bg-[#B026FF] animate-pulse"></div>
-              Доступен для новых проектов
-            </div>
-            <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">
-              Автоматизация бизнес-процессов и <span className="bg-gradient-to-r from-[#39FF14] to-[#B026FF] text-transparent bg-clip-text">цифровой дизайн</span>.
-            </h1>
-            <p className="text-lg md:text-xl text-gray-400 max-w-lg leading-relaxed">
-              Создаю экосистемы: от эстетичных визиток до сложных Telegram-ботов с интеграцией в Google Sheets.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 mt-4 w-full sm:w-auto">
-              <a href="https://t.me/Ekater5rina" target="_blank" rel="noopener noreferrer" className={`px-8 py-4 rounded-lg text-center ${neonButton}`}>
-                Обсудить проект
-              </a>
-              <a href="#cases" className="px-8 py-4 rounded-lg text-center border border-[#333] text-white hover:bg-[#1A1A1A] transition-colors">
-                Смотреть кейсы
-              </a>
-            </div>
-          </div>
-          
-          {/* Фотография профиля */}
-          <div className="relative h-[400px] w-full flex justify-center items-center">
-            {/* Свечение на заднем фоне */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#39FF14]/20 to-[#B026FF]/20 blur-3xl rounded-full z-0 opacity-40 group-hover:opacity-70 transition-opacity"></div>
             
-            {/* Неоновая рамка - ширина адаптирована под мобилки */}
-            <div className={`w-full max-w-[320px] aspect-[4/5] sm:h-96 relative z-10 rounded-2xl p-[2px] bg-gradient-to-br from-[#39FF14] via-[#222] to-[#B026FF] group hover:shadow-[0_0_30px_rgba(176,38,255,0.4)] transition-all duration-500`}>
-              <div className="w-full h-full bg-[#111] rounded-2xl overflow-hidden relative">
-                
-                {/* Легкий кибер-оверлей поверх фото */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D] via-transparent to-transparent z-10 opacity-90"></div>
-                <div className="absolute top-0 left-0 w-full h-full bg-[#B026FF]/10 mix-blend-overlay z-10 pointer-events-none group-hover:opacity-0 transition-opacity"></div>
-                
-                {/* Само фото */}
-                <a href="https://yapx.ru/image/dO7L5" target="_blank" rel="noopener noreferrer" title="Фотография загружена на фотохостинг yapx.ru" className="block w-full h-full">
-                  <img 
-                    src="https://i.yapx.ru/dO7L5.jpg" 
-                    alt="Смотреть на фотохостинг сайте yapx.ru" 
-                    className="w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 transition-all duration-700 transform group-hover:scale-105"
-                  />
+            <!-- Кнопка бургер-меню для мобилок -->
+            <button id="mobileMenuBtn" class="md:hidden text-gray-300 hover:text-[#39FF14] transition-colors">
+                <i data-lucide="menu" id="menuIcon"></i>
+            </button>
+        </div>
+        
+        <!-- Выпадающее мобильное меню -->
+        <div id="mobileMenu" class="md:hidden absolute top-full left-0 w-full bg-[#0D0D0D]/95 backdrop-blur-xl border-b border-[#1A1A1A] transition-all duration-300 overflow-hidden max-h-0 py-0 opacity-0">
+            <div class="flex flex-col gap-6 px-6">
+                <a href="#services" class="mobile-link text-lg font-medium hover:text-[#39FF14] transition-colors">Услуги</a>
+                <a href="#portfolio" class="mobile-link text-lg font-medium hover:text-[#39FF14] transition-colors">Портфолио</a>
+                <a href="#cases" class="mobile-link text-lg font-medium hover:text-[#39FF14] transition-colors">Кейсы</a>
+                <a href="#contact" class="mobile-link text-lg font-medium hover:text-[#39FF14] transition-colors">Контакты</a>
+                <a href="https://t.me/Ekater5rina" target="_blank" rel="noopener noreferrer" class="mt-2 py-4 rounded-lg text-center bg-[#39FF14] text-black font-bold hover:shadow-[0_0_25px_rgba(57,255,20,0.6)] transition-all duration-300">
+                    Связаться в Telegram
                 </a>
-                
-                {/* Декоративная плашка со статусом */}
-                <div className="absolute bottom-5 left-5 right-5 z-20 backdrop-blur-md bg-black/50 border border-white/10 rounded-xl p-3 flex items-center justify-between group-hover:border-[#39FF14]/50 transition-colors">
-                  <div>
-                    <p className="text-[#39FF14] font-mono text-[10px] uppercase tracking-widest font-bold mb-1">System Status</p>
-                    <p className="text-white text-sm font-bold tracking-wider">ONLINE_</p>
-                  </div>
-                  <div className="w-3 h-3 bg-[#39FF14] rounded-full animate-pulse shadow-[0_0_10px_#39FF14]"></div>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
-      </section>
+    </nav>
 
-      {/* Блок 2: Стек технологий */}
-      <section className="py-12 border-y border-[#1A1A1A] bg-[#0A0A0A]">
-        <div className="container mx-auto px-6 max-w-6xl">
-          <p className="text-center text-sm text-gray-500 uppercase tracking-widest mb-8">Стек технологий & инструменты</p>
-          <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
-            <div className="flex items-center gap-2 font-bold text-xl"><div className="w-6 h-6 bg-white rounded-sm flex items-center justify-center text-black text-xs">T</div> Tilda</div>
-            <div className="flex items-center gap-2"><Send size={24} /> Telegram API</div>
-            <div className="flex items-center gap-2"><FileSpreadsheet size={24} /> Google Sheets</div>
-            <div className="flex items-center gap-2"><Github size={24} /> GitHub</div>
-            <div className="flex items-center gap-2"><Triangle size={24} /> Vercel</div>
-            <div className="flex items-center gap-2"><Code2 size={24} /> VS Code</div>
-          </div>
-        </div>
-      </section>
-
-      {/* Блок 3: Услуги */}
-      <section id="services" className="py-24">
-        <div className="container mx-auto px-6 max-w-6xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-16 text-center">
-            Что я <span className={neonText}>создаю</span>
-          </h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {/* Карточка 1 */}
-            <div className={`bg-[#111] border border-[#222] p-8 rounded-2xl transition-all duration-300 ${neonShadow} group`}>
-              <div className={`w-14 h-14 rounded-xl bg-[#1A1A1A] flex items-center justify-center mb-6 group-hover:bg-[#39FF14]/10 transition-colors`}>
-                <Bot className={`text-gray-400 group-hover:${neonText} transition-colors`} size={28} />
-              </div>
-              <h3 className="text-xl font-bold text-white mb-4">Разработка и Интеграции</h3>
-              <p className="text-gray-400 leading-relaxed text-sm">
-                Создание Telegram-ботов, синхронизация с таблицами, настройка уведомлений и полная автоматизация процесса приема заказов.
-              </p>
-            </div>
-
-            {/* Карточка 2 */}
-            <div className={`bg-[#111] border border-[#222] p-8 rounded-2xl transition-all duration-300 ${purpleShadow} group`}>
-              <div className={`w-14 h-14 rounded-xl bg-[#1A1A1A] flex items-center justify-center mb-6 group-hover:bg-[#B026FF]/10 transition-colors`}>
-                <BarChart3 className={`text-gray-400 group-hover:${textPurple} transition-colors`} size={28} />
-              </div>
-              <h3 className="text-xl font-bold text-white mb-4">Аналитика и Данные</h3>
-              <p className="text-gray-400 leading-relaxed text-sm">
-                Профессиональные дашборды в Google Sheets, визуализация KPI и настройка прозрачной отчетности «в один клик».
-              </p>
-            </div>
-
-            {/* Карточка 3 */}
-            <div className={`bg-[#111] border border-[#222] p-8 rounded-2xl transition-all duration-300 ${neonShadow} group`}>
-              <div className={`w-14 h-14 rounded-xl bg-[#1A1A1A] flex items-center justify-center mb-6 group-hover:bg-[#39FF14]/10 transition-colors`}>
-                <Layout className={`text-gray-400 group-hover:${neonText} transition-colors`} size={28} />
-              </div>
-              <h3 className="text-xl font-bold text-white mb-4">Дизайн и Веб</h3>
-              <p className="text-gray-400 leading-relaxed text-sm">
-                Создание стильных сайтов на Tilda, разработка UI-китов под ваш бренд, а также дизайн цифровых и печатных визиток.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Блок: Интерактивная карусель портфолио */}
-      <section id="portfolio" className="py-24 bg-[#0A0A0A] border-t border-[#1A1A1A]">
-        <div className="container mx-auto px-6 max-w-6xl">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Галерея <span className={textPurple}>работ</span>
-              </h2>
-              <p className="text-gray-400 max-w-lg">Примеры сайтов, ботов и систем, которые я могу реализовать для вашего проекта.</p>
-            </div>
-            <div className="flex gap-4">
-              <button 
-                onClick={prevSlide} 
-                className="w-12 h-12 rounded-full border border-[#333] flex items-center justify-center hover:border-[#B026FF] hover:text-[#B026FF] transition-colors bg-[#111] text-gray-400"
-                aria-label="Предыдущий слайд"
-              >
-                <ChevronLeft size={24} />
-              </button>
-              <button 
-                onClick={nextSlide} 
-                className="w-12 h-12 rounded-full border border-[#333] flex items-center justify-center hover:border-[#39FF14] hover:text-[#39FF14] transition-colors bg-[#111] text-gray-400"
-                aria-label="Следующий слайд"
-              >
-                <ChevronRight size={24} />
-              </button>
-            </div>
-          </div>
-
-          {/* Контейнер слайдера */}
-          <div 
-            className="relative overflow-hidden rounded-2xl border border-[#222] bg-[#111] shadow-2xl"
-            onTouchStart={onTouchStart}
-            onTouchMove={onTouchMove}
-            onTouchEnd={onTouchEndEvent}
-          >
-            <div 
-              className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-            >
-              {portfolioItems.map((item, idx) => (
-                <div key={item.id} className="w-full flex-shrink-0 grid md:grid-cols-2">
-                  {/* Визуальная часть слайда (Мокап/Видео) */}
-                  <div className={`h-64 md:h-[450px] bg-gradient-to-br ${item.gradient} flex items-center justify-center relative overflow-hidden ${!item.videoUrl && 'p-8 group cursor-pointer'}`}>
-                    {item.videoUrl ? (
-                      <div className="absolute inset-0 w-full h-full bg-black z-10">
-                        <iframe 
-                          src={item.videoUrl} 
-                          allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;" 
-                          frameBorder="0" 
-                          allowFullScreen 
-                          className="w-full h-full"
-                        ></iframe>
-                        {/* Легкий градиент снизу для плавного перехода в темный фон, не блокирующий клики */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#111] h-16 top-auto via-[#111]/50 to-transparent pointer-events-none z-20"></div>
-                      </div>
-                    ) : item.image ? (
-                      <>
-                        <img src={item.image} alt={item.title} className="absolute inset-0 w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/20 to-transparent pointer-events-none"></div>
-                      </>
-                    ) : (
-                      <>
-                        <div className="absolute inset-0 bg-[#0D0D0D]/40 backdrop-blur-[2px]"></div>
-                        <div className="relative z-10 bg-[#0D0D0D]/60 p-8 md:p-12 rounded-2xl border border-white/10 backdrop-blur-md transform group-hover:scale-105 transition-transform duration-500 shadow-2xl flex flex-col items-center gap-4">
-                           <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl pointer-events-none"></div>
-                           {item.icon}
-                           <div className="w-32 h-2 bg-gray-800 rounded-full mt-4 overflow-hidden">
-                              <div className="w-1/2 h-full bg-current opacity-50 animate-pulse rounded-full"></div>
-                           </div>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                  {/* Текстовая часть слайда */}
-                  <div className="p-8 md:p-12 flex flex-col justify-center bg-[#111] relative z-20">
-                    <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-transparent via-[#222] to-transparent hidden md:block"></div>
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {item.tags.map((tag, tIdx) => (
-                        <span key={tIdx} className="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight">{item.title}</h3>
-                    <p className="text-gray-400 leading-relaxed mb-10 text-lg">{item.description}</p>
-                    <a href="#contact" className="inline-flex items-center gap-2 text-white font-bold hover:text-[#39FF14] transition-colors w-max group">
-                      Заказать похожий <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
-                    </a>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          
-          {/* Индикаторы слайдов (Dots) */}
-          <div className="flex justify-center gap-3 mt-8">
-            {portfolioItems.map((_, idx) => (
-              <button 
-                key={idx}
-                onClick={() => setCurrentSlide(idx)}
-                aria-label={`Перейти к слайду ${idx + 1}`}
-                className={`h-2 rounded-full transition-all duration-300 ${currentSlide === idx ? 'bg-gradient-to-r from-[#39FF14] to-[#B026FF] w-12' : 'bg-[#333] w-2 hover:bg-[#555]'}`}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Блок 4: Кейсы */}
-      <section id="cases" className="py-24 bg-[#0D0D0D] border-t border-[#1A1A1A]">
-        <div className="container mx-auto px-6 max-w-6xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-16">
-            Избранные <span className={neonText}>Кейсы</span>
-          </h2>
-          
-          <div className="space-y-8">
-            {/* Кейс 1 */}
-            <div className="bg-[#111] border border-[#222] rounded-2xl overflow-hidden grid md:grid-cols-12 gap-0">
-              <div className="md:col-span-5 bg-[#1A1A1A] p-8 flex items-center justify-center border-b md:border-b-0 md:border-r border-[#222]">
-                <div className="text-center space-y-4">
-                  <Bot size={48} className={neonText} />
-                  <h4 className="text-white font-bold text-xl">Система учета финансов</h4>
-                  <p className="text-xs font-mono text-gray-500">ТГ-бот + Google Sheets + Apps Script</p>
-                </div>
-              </div>
-              <div className="md:col-span-7 p-8 md:p-10 space-y-6">
-                <div>
-                  <h5 className="text-gray-500 text-sm uppercase tracking-wider mb-2 font-semibold">Задача</h5>
-                  <p className="text-gray-300 text-sm">Избавить клиента от ручного ведения расходов в блокнотах и неудобных приложениях.</p>
-                </div>
-                <div>
-                  <h5 className="text-gray-500 text-sm uppercase tracking-wider mb-2 font-semibold">Решение</h5>
-                  <p className="text-gray-300 text-sm">Разработан ТГ-бот, который парсит текстовые сообщения с тратами и мгновенно раскидывает их по категориям в защищенной Google Таблице с авто-дашбордом.</p>
-                </div>
-                <div className="pt-4 border-t border-[#222]">
-                  <h5 className={`text-sm uppercase tracking-wider mb-2 font-semibold ${neonText}`}>Результат</h5>
-                  <p className="text-white">Время на отчетность сократилось с 1 часа в неделю до 2 минут в день. Данные всегда под рукой.</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Кейс 2 */}
-            <div className="bg-[#111] border border-[#222] rounded-2xl overflow-hidden grid md:grid-cols-12 gap-0">
-              <div className="md:col-span-5 bg-[#1A1A1A] p-8 flex items-center justify-center border-b md:border-b-0 md:border-r border-[#222]">
-                <div className="text-center space-y-4">
-                  <Layout size={48} className={textPurple} />
-                  <h4 className="text-white font-bold text-xl">Cyber/Neon UI Kit</h4>
-                  <p className="text-xs font-mono text-gray-500">Figma + Tilda Zero Block</p>
-                </div>
-              </div>
-              <div className="md:col-span-7 p-8 md:p-10 space-y-6">
-                <div>
-                  <h5 className="text-gray-500 text-sm uppercase tracking-wider mb-2 font-semibold">Задача</h5>
-                  <p className="text-gray-300 text-sm">Создать единую дизайн-систему для технологичного стартапа, чтобы ускорить сборку новых лендингов.</p>
-                </div>
-                <div>
-                  <h5 className="text-gray-500 text-sm uppercase tracking-wider mb-2 font-semibold">Решение</h5>
-                  <p className="text-gray-300 text-sm">Отрисован UI Kit в темной теме с неоновыми акцентами: кнопки, формы, карточки, типографика. Все элементы перенесены в библиотеку Tilda.</p>
-                </div>
-                <div className="pt-4 border-t border-[#222]">
-                  <h5 className={`text-sm uppercase tracking-wider mb-2 font-semibold ${textPurple}`}>Результат</h5>
-                  <p className="text-white">Сборка новых страниц стала занимать в 2 раза меньше времени, дизайн стал консистентным и узнаваемым.</p>
-                </div>
-              </div>
-            </div>
-
-             {/* Кейс 3 */}
-             <div className="bg-[#111] border border-[#222] rounded-2xl overflow-hidden grid md:grid-cols-12 gap-0">
-              <div className="md:col-span-5 bg-[#1A1A1A] p-8 flex items-center justify-center border-b md:border-b-0 md:border-r border-[#222]">
-                <div className="text-center space-y-4">
-                  <div className="flex justify-center text-white font-bold text-2xl tracking-tighter">T</div>
-                  <h4 className="text-white font-bold text-xl">Сайт косметологии</h4>
-                  <p className="text-xs font-mono text-gray-500">Tilda + Webhooks + CRM</p>
-                </div>
-              </div>
-              <div className="md:col-span-7 p-8 md:p-10 space-y-6">
-                <div>
-                  <h5 className="text-gray-500 text-sm uppercase tracking-wider mb-2 font-semibold">Задача</h5>
-                  <p className="text-gray-300 text-sm">Упаковать услуги клиники, сделать удобную онлайн-запись и исключить потерю заявок администраторами.</p>
-                </div>
-                <div>
-                  <h5 className="text-gray-500 text-sm uppercase tracking-wider mb-2 font-semibold">Решение</h5>
-                  <p className="text-gray-300 text-sm">Разработан многостраничный сайт с эстетичным дизайном. Настроена маршрутизация: заявки падают напрямую в Telegram админу и дублируются в базу данных (Таблицы).</p>
-                </div>
-                <div className="pt-4 border-t border-[#222]">
-                  <h5 className={`text-sm uppercase tracking-wider mb-2 font-semibold ${neonText}`}>Результат</h5>
-                  <p className="text-white">Конверсия в запись выросла на 35%. Ни один лид не теряется благодаря дублированию данных.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Блок 5: Контакты и Футер */}
-      <section id="contact" className="py-24 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#39FF14]/5 rounded-full blur-[100px] pointer-events-none"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#B026FF]/5 rounded-full blur-[100px] pointer-events-none"></div>
+    <!-- Блок 1: Hero-экран -->
+    <section class="relative pt-40 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-[#39FF14]/5 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-[#B026FF]/10 rounded-full blur-[80px] pointer-events-none"></div>
         
-        <div className="container mx-auto px-6 max-w-6xl relative z-10 grid md:grid-cols-2 gap-16">
-          <div>
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              Готовы начать <span className={neonText}>работу?</span>
-            </h2>
-            <p className="text-gray-400 mb-10 text-lg">
-              Опишите вашу задачу. Я свяжусь с вами в Telegram для обсуждения деталей и оценки проекта.
-            </p>
-            
-            <div className="space-y-6">
-              <a href="https://t.me/Ekater5rina" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 text-gray-300 hover:text-[#39FF14] transition-colors group">
-                <div className="w-12 h-12 rounded-full bg-[#1A1A1A] flex items-center justify-center group-hover:bg-[#39FF14]/20 transition-colors">
-                  <Send size={20} />
+        <div class="container mx-auto px-6 max-w-6xl relative z-10 grid md:grid-cols-2 gap-12 items-center">
+            <div class="flex flex-col items-start gap-6">
+                <div class="px-4 py-1 rounded-full border border-[#1A1A1A] bg-[#141414] text-xs font-mono flex items-center gap-2">
+                    <div class="w-2 h-2 rounded-full bg-[#B026FF] animate-pulse"></div>
+                    Доступен для новых проектов
                 </div>
-                <div>
-                  <p className="font-bold text-white group-hover:text-[#39FF14] transition-colors">Telegram</p>
-                  <p className="text-sm">@Ekater5rina</p>
+                <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight">
+                    Автоматизация бизнес-процессов и <span class="bg-gradient-to-r from-[#39FF14] to-[#B026FF] text-transparent bg-clip-text">цифровой дизайн</span>.
+                </h1>
+                <p class="text-lg md:text-xl text-gray-400 max-w-lg leading-relaxed">
+                    Создаю экосистемы: от эстетичных визиток до сложных Telegram-ботов с интеграцией в Google Sheets.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 mt-4 w-full sm:w-auto">
+                    <a href="https://t.me/Ekater5rina" target="_blank" rel="noopener noreferrer" class="px-8 py-4 rounded-lg text-center bg-[#39FF14] text-black font-bold hover:shadow-[0_0_25px_rgba(57,255,20,0.6)] transition-all duration-300">
+                        Обсудить проект
+                    </a>
+                    <a href="#cases" class="px-8 py-4 rounded-lg text-center border border-[#333] text-white hover:bg-[#1A1A1A] transition-colors">
+                        Смотреть кейсы
+                    </a>
                 </div>
-              </a>
-              <a href="#" className="flex items-center gap-4 text-gray-300 hover:text-[#39FF14] transition-colors group">
-                <div className="w-12 h-12 rounded-full bg-[#1A1A1A] flex items-center justify-center group-hover:bg-[#39FF14]/20 transition-colors">
-                  <Github size={20} />
-                </div>
-                <div>
-                  <p className="font-bold text-white group-hover:text-[#39FF14] transition-colors">GitHub</p>
-                  <p className="text-sm">/your-github</p>
-                </div>
-              </a>
-              <a href="#" className="flex items-center gap-4 text-gray-300 hover:text-[#39FF14] transition-colors group">
-                <div className="w-12 h-12 rounded-full bg-[#1A1A1A] flex items-center justify-center group-hover:bg-[#39FF14]/20 transition-colors">
-                  <Layout size={20} />
-                </div>
-                <div>
-                  <p className="font-bold text-white group-hover:text-[#39FF14] transition-colors">Avito</p>
-                  <p className="text-sm">Профиль услуг</p>
-                </div>
-              </a>
             </div>
-          </div>
-
-          {/* Форма захвата */}
-          <div className="bg-[#111] p-8 md:p-10 rounded-2xl border border-[#222] shadow-2xl relative overflow-hidden">
-            {formStatus === 'success' ? (
-              <div className="absolute inset-0 bg-[#111] flex flex-col items-center justify-center text-center p-8 z-20">
-                <CheckCircle2 size={64} className={`${neonText} mb-6`} />
-                <h3 className="text-2xl font-bold text-white mb-2">Заявка отправлена!</h3>
-                <p className="text-gray-400">Данные улетели в Google Sheets и Telegram. Я скоро свяжусь с вами.</p>
-              </div>
-            ) : null}
-
-            <h3 className="text-2xl font-bold text-white mb-8">Оставить заявку</h3>
-            <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
-              <div>
-                <label className="block text-sm font-medium text-gray-400 mb-2">Ваше имя / Ник в ТГ</label>
-                <input 
-                  type="text" 
-                  required
-                  placeholder="@username"
-                  className="w-full bg-[#1A1A1A] border border-[#333] rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#39FF14] transition-colors placeholder-gray-600"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-400 mb-2">Краткое описание задачи</label>
-                <textarea 
-                  required
-                  rows="4"
-                  placeholder="Нужен сайт на Tilda и бот..."
-                  className="w-full bg-[#1A1A1A] border border-[#333] rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#39FF14] transition-colors resize-none placeholder-gray-600"
-                ></textarea>
-              </div>
-              <button 
-                type="submit" 
-                disabled={formStatus === 'submitting'}
-                className={`w-full py-4 rounded-lg flex justify-center items-center gap-2 ${neonButton} ${formStatus === 'submitting' ? 'opacity-70 cursor-wait' : ''}`}
-              >
-                {formStatus === 'submitting' ? 'Отправка...' : 'Отправить задачу'}
-                {formStatus !== 'submitting' && <ChevronRight size={20} />}
-              </button>
-              <p className="text-xs text-center text-gray-600">
-                Нажимая кнопку, симулируется отправка webhook-а в Telegram.
-              </p>
-            </form>
-          </div>
+            
+            <!-- Фотография профиля -->
+            <div class="relative h-[400px] w-full flex justify-center items-center">
+                <div class="absolute inset-0 bg-gradient-to-tr from-[#39FF14]/20 to-[#B026FF]/20 blur-3xl rounded-full z-0 opacity-40 hover:opacity-70 transition-opacity peer"></div>
+                
+                <div class="w-full max-w-[320px] aspect-[4/5] sm:h-96 relative z-10 rounded-2xl p-[2px] bg-gradient-to-br from-[#39FF14] via-[#222] to-[#B026FF] group hover:shadow-[0_0_30px_rgba(176,38,255,0.4)] transition-all duration-500">
+                    <div class="w-full h-full bg-[#111] rounded-2xl overflow-hidden relative">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0D0D0D] via-transparent to-transparent z-10 opacity-90"></div>
+                        <div class="absolute top-0 left-0 w-full h-full bg-[#B026FF]/10 mix-blend-overlay z-10 pointer-events-none group-hover:opacity-0 transition-opacity"></div>
+                        
+                        <a href="https://yapx.ru/image/dO7L5" target="_blank" rel="noopener noreferrer" title="Фотография загружена на фотохостинг yapx.ru" class="block w-full h-full">
+                            <img src="https://i.yapx.ru/dO7L5.jpg" alt="Смотреть на фотохостинг сайте yapx.ru" class="w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 transition-all duration-700 transform group-hover:scale-105" />
+                        </a>
+                        
+                        <div class="absolute bottom-5 left-5 right-5 z-20 backdrop-blur-md bg-black/50 border border-white/10 rounded-xl p-3 flex items-center justify-between group-hover:border-[#39FF14]/50 transition-colors">
+                            <div>
+                                <p class="text-[#39FF14] font-mono text-[10px] uppercase tracking-widest font-bold mb-1">System Status</p>
+                                <p class="text-white text-sm font-bold tracking-wider">ONLINE_</p>
+                            </div>
+                            <div class="w-3 h-3 bg-[#39FF14] rounded-full animate-pulse shadow-[0_0_10px_#39FF14]"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </section>
+    </section>
 
-      {/* Футер */}
-      <footer className="border-t border-[#1A1A1A] py-8 text-center text-sm text-gray-500">
-        <div className="container mx-auto px-6">
-          <p>© {new Date().getFullYear()} Digital Integrator. Создано на основе ТЗ.</p>
+    <!-- Блок 2: Стек технологий -->
+    <section class="py-12 border-y border-[#1A1A1A] bg-[#0A0A0A]">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <p class="text-center text-sm text-gray-500 uppercase tracking-widest mb-8">Стек технологий & инструменты</p>
+            <div class="flex flex-wrap justify-center gap-8 md:gap-16 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+                <div class="flex items-center gap-2 font-bold text-xl"><div class="w-6 h-6 bg-white rounded-sm flex items-center justify-center text-black text-xs">T</div> Tilda</div>
+                <div class="flex items-center gap-2"><i data-lucide="send"></i> Telegram API</div>
+                <div class="flex items-center gap-2"><i data-lucide="file-spreadsheet"></i> Google Sheets</div>
+                <div class="flex items-center gap-2"><i data-lucide="github"></i> GitHub</div>
+                <div class="flex items-center gap-2"><i data-lucide="triangle"></i> Vercel</div>
+                <div class="flex items-center gap-2"><i data-lucide="code-2"></i> VS Code</div>
+            </div>
         </div>
-      </footer>
-    </div>
-  );
-}
+    </section>
+
+    <!-- Блок 3: Услуги -->
+    <section id="services" class="py-24">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-16 text-center">
+                Что я <span class="text-[#39FF14]">создаю</span>
+            </h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Карточка 1 -->
+                <div class="bg-[#111] border border-[#222] p-8 rounded-2xl transition-all duration-300 hover:shadow-[0_0_20px_rgba(57,255,20,0.3)] hover:border-[#39FF14] group">
+                    <div class="w-14 h-14 rounded-xl bg-[#1A1A1A] flex items-center justify-center mb-6 group-hover:bg-[#39FF14]/10 transition-colors">
+                        <i data-lucide="bot" class="text-gray-400 group-hover:text-[#39FF14] transition-colors w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Разработка и Интеграции</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">
+                        Создание Telegram-ботов, синхронизация с таблицами, настройка уведомлений и полная автоматизация процесса приема заказов.
+                    </p>
+                </div>
+
+                <!-- Карточка 2 -->
+                <div class="bg-[#111] border border-[#222] p-8 rounded-2xl transition-all duration-300 hover:shadow-[0_0_20px_rgba(176,38,255,0.3)] hover:border-[#B026FF] group">
+                    <div class="w-14 h-14 rounded-xl bg-[#1A1A1A] flex items-center justify-center mb-6 group-hover:bg-[#B026FF]/10 transition-colors">
+                        <i data-lucide="bar-chart-3" class="text-gray-400 group-hover:text-[#B026FF] transition-colors w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Аналитика и Данные</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">
+                        Профессиональные дашборды в Google Sheets, визуализация KPI и настройка прозрачной отчетности «в один клик».
+                    </p>
+                </div>
+
+                <!-- Карточка 3 -->
+                <div class="bg-[#111] border border-[#222] p-8 rounded-2xl transition-all duration-300 hover:shadow-[0_0_20px_rgba(57,255,20,0.3)] hover:border-[#39FF14] group">
+                    <div class="w-14 h-14 rounded-xl bg-[#1A1A1A] flex items-center justify-center mb-6 group-hover:bg-[#39FF14]/10 transition-colors">
+                        <i data-lucide="layout" class="text-gray-400 group-hover:text-[#39FF14] transition-colors w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Дизайн и Веб</h3>
+                    <p class="text-gray-400 leading-relaxed text-sm">
+                        Создание стильных сайтов на Tilda, разработка UI-китов под ваш бренд, а также дизайн цифровых и печатных визиток.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок: Интерактивная карусель портфолио -->
+    <section id="portfolio" class="py-24 bg-[#0A0A0A] border-t border-[#1A1A1A]">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                        Галерея <span class="text-[#B026FF]">работ</span>
+                    </h2>
+                    <p class="text-gray-400 max-w-lg">Примеры сайтов, ботов и систем, которые я могу реализовать для вашего проекта.</p>
+                </div>
+                <div class="flex gap-4">
+                    <button id="prevBtn" class="w-12 h-12 rounded-full border border-[#333] flex items-center justify-center hover:border-[#B026FF] hover:text-[#B026FF] transition-colors bg-[#111] text-gray-400" aria-label="Предыдущий слайд">
+                        <i data-lucide="chevron-left"></i>
+                    </button>
+                    <button id="nextBtn" class="w-12 h-12 rounded-full border border-[#333] flex items-center justify-center hover:border-[#39FF14] hover:text-[#39FF14] transition-colors bg-[#111] text-gray-400" aria-label="Следующий слайд">
+                        <i data-lucide="chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Контейнер слайдера -->
+            <div id="sliderContainer" class="relative overflow-hidden rounded-2xl border border-[#222] bg-[#111] shadow-2xl">
+                <div id="sliderTrack" class="flex transition-transform duration-500 ease-in-out" style="transform: translateX(0%);">
+                    
+                    <!-- Слайд 1: Лендинг (Видео) -->
+                    <div class="w-full flex-shrink-0 grid md:grid-cols-2 slider-item">
+                        <div class="h-64 md:h-[450px] bg-gradient-to-br from-[#39FF14]/40 to-[#0D0D0D] flex items-center justify-center relative overflow-hidden">
+                            <div class="absolute inset-0 w-full h-full bg-black z-10">
+                                <iframe src="https://kinescope.io/embed/wbF7ioMvJpgpR7Pd6jcbco" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;" frameborder="0" allowfullscreen class="w-full h-full"></iframe>
+                                <div class="absolute inset-0 bg-gradient-to-t from-[#111] h-16 top-auto via-[#111]/50 to-transparent pointer-events-none z-20"></div>
+                            </div>
+                        </div>
+                        <div class="p-8 md:p-12 flex flex-col justify-center bg-[#111] relative z-20">
+                            <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-transparent via-[#222] to-transparent hidden md:block"></div>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">Tilda</span>
+                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">Web Design</span>
+                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">Dark Theme</span>
+                            </div>
+                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight">Лендинг для стартапа</h3>
+                            <p class="text-gray-400 leading-relaxed mb-10 text-lg">Анимации по скроллу, 3D-элементы, сложная верстка в Zero Block и интеграция с формой сбора контактов.</p>
+                            <a href="#contact" class="inline-flex items-center gap-2 text-white font-bold hover:text-[#39FF14] transition-colors w-max group">
+                                Заказать похожий <i data-lucide="chevron-right" class="group-hover:translate-x-1 transition-transform w-5 h-5"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Слайд 2: BI Дашборд -->
+                    <div class="w-full flex-shrink-0 grid md:grid-cols-2 slider-item">
+                        <div class="h-64 md:h-[450px] bg-gradient-to-br from-cyan-500/40 to-[#0D0D0D] flex items-center justify-center relative overflow-hidden group cursor-pointer">
+                            <img src="https://i.yapx.ru/dO8BO.jpg" alt="Дашборд" class="absolute inset-0 w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/20 to-transparent pointer-events-none"></div>
+                        </div>
+                        <div class="p-8 md:p-12 flex flex-col justify-center bg-[#111] relative z-20">
+                            <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-transparent via-[#222] to-transparent hidden md:block"></div>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">Аналитика</span>
+                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">Data Viz</span>
+                            </div>
+                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight">Корпоративный BI-Дашборд</h3>
+                            <p class="text-gray-400 leading-relaxed mb-10 text-lg">Профессиональная сводка для руководителей: визуализация ключевых показателей (KPI), мониторинг планов и авто-обновление метрик.</p>
+                            <a href="#contact" class="inline-flex items-center gap-2 text-white font-bold hover:text-[#39FF14] transition-colors w-max group">
+                                Заказать похожий <i data-lucide="chevron-right" class="group-hover:translate-x-1 transition-transform w-5 h-5"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Слайд 3: Бот-менеджер -->
+                    <div class="w-full flex-shrink-0 grid md:grid-cols-2 slider-item">
+                        <div class="h-64 md:h-[450px] bg-gradient-to-br from-[#B026FF]/40 to-[#0D0D0D] flex items-center justify-center relative overflow-hidden group cursor-pointer">
+                            <img src="https://i.yapx.ru/dO7je.jpg" alt="Бот" class="absolute inset-0 w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/20 to-transparent pointer-events-none"></div>
+                        </div>
+                        <div class="p-8 md:p-12 flex flex-col justify-center bg-[#111] relative z-20">
+                            <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-transparent via-[#222] to-transparent hidden md:block"></div>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">Telegram API</span>
+                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">Интеграция</span>
+                            </div>
+                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight">Бот-менеджер для бизнеса</h3>
+                            <p class="text-gray-400 leading-relaxed mb-10 text-lg">Автоматическая обработка заявок, ответы на частые вопросы и маршрутизация клиентов прямо в мессенджере.</p>
+                            <a href="#contact" class="inline-flex items-center gap-2 text-white font-bold hover:text-[#39FF14] transition-colors w-max group">
+                                Заказать похожий <i data-lucide="chevron-right" class="group-hover:translate-x-1 transition-transform w-5 h-5"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Слайд 4: CRM -->
+                    <div class="w-full flex-shrink-0 grid md:grid-cols-2 slider-item">
+                        <div class="h-64 md:h-[450px] bg-gradient-to-br from-blue-500/40 to-[#0D0D0D] flex items-center justify-center relative overflow-hidden group cursor-pointer">
+                            <img src="https://i.yapx.ru/dO7jg.jpg" alt="CRM" class="absolute inset-0 w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/20 to-transparent pointer-events-none"></div>
+                        </div>
+                        <div class="p-8 md:p-12 flex flex-col justify-center bg-[#111] relative z-20">
+                            <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-transparent via-[#222] to-transparent hidden md:block"></div>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">Google Sheets</span>
+                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">Аналитика</span>
+                            </div>
+                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight">Умная CRM в таблицах</h3>
+                            <p class="text-gray-400 leading-relaxed mb-10 text-lg">Сводка KPI, авто-подсчет доходов/расходов и генерация красивых графиков для владельца бизнеса.</p>
+                            <a href="#contact" class="inline-flex items-center gap-2 text-white font-bold hover:text-[#39FF14] transition-colors w-max group">
+                                Заказать похожий <i data-lucide="chevron-right" class="group-hover:translate-x-1 transition-transform w-5 h-5"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Слайд 5: UI Kit -->
+                    <div class="w-full flex-shrink-0 grid md:grid-cols-2 slider-item">
+                        <div class="h-64 md:h-[450px] bg-gradient-to-br from-pink-500/40 to-[#0D0D0D] flex items-center justify-center relative overflow-hidden group cursor-pointer">
+                            <img src="https://i.yapx.ru/dO7jd.jpg" alt="UI Kit" class="absolute inset-0 w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/20 to-transparent pointer-events-none"></div>
+                        </div>
+                        <div class="p-8 md:p-12 flex flex-col justify-center bg-[#111] relative z-20">
+                            <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-transparent via-[#222] to-transparent hidden md:block"></div>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">Figma</span>
+                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">UI/UX</span>
+                            </div>
+                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight">Neon/Cyber UI Kit</h3>
+                            <p class="text-gray-400 leading-relaxed mb-10 text-lg">Готовый набор кнопок, форм и карточек для быстрой сборки технологичных и стильных интерфейсов.</p>
+                            <a href="#contact" class="inline-flex items-center gap-2 text-white font-bold hover:text-[#39FF14] transition-colors w-max group">
+                                Заказать похожий <i data-lucide="chevron-right" class="group-hover:translate-x-1 transition-transform w-5 h-5"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+            <!-- Индикаторы слайдов (Dots) -->
+            <div id="sliderDots" class="flex justify-center gap-3 mt-8">
+                <!-- Точки будут сгенерированы через JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок 4: Кейсы -->
+    <section id="cases" class="py-24 bg-[#0D0D0D] border-t border-[#1A1A1A]">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-16">
+                Избранные <span class="text-[#39FF14]">Кейсы</span>
+            </h2>
+            
+            <div class="space-y-8">
+                <!-- Кейс 1 -->
+                <div class="bg-[#111] border border-[#222] rounded-2xl overflow-hidden grid md:grid-cols-12 gap-0">
+                    <div class="md:col-span-5 bg-[#1A1A1A] p-8 flex items-center justify-center border-b md:border-b-0 md:border-r border-[#222]">
+                        <div class="text-center space-y-4">
+                            <i data-lucide="bot" class="text-[#39FF14] w-12 h-12 mx-auto"></i>
+                            <h4 class="text-white font-bold text-xl">Система учета финансов</h4>
+                            <p class="text-xs font-mono text-gray-500">ТГ-бот + Google Sheets</p>
+                        </div>
+                    </div>
+                    <div class="md:col-span-7 p-8 md:p-10 space-y-6">
+                        <div>
+                            <h5 class="text-gray-500 text-sm uppercase tracking-wider mb-2 font-semibold">Задача</h5>
+                            <p class="text-gray-300 text-sm">Избавить клиента от ручного ведения расходов в блокнотах и неудобных приложениях.</p>
+                        </div>
+                        <div>
+                            <h5 class="text-gray-500 text-sm uppercase tracking-wider mb-2 font-semibold">Решение</h5>
+                            <p class="text-gray-300 text-sm">Разработан ТГ-бот, который парсит текстовые сообщения с тратами и мгновенно раскидывает их по категориям в защищенной Google Таблице с авто-дашбордом.</p>
+                        </div>
+                        <div class="pt-4 border-t border-[#222]">
+                            <h5 class="text-sm uppercase tracking-wider mb-2 font-semibold text-[#39FF14]">Результат</h5>
+                            <p class="text-white">Время на отчетность сократилось с 1 часа в неделю до 2 минут в день. Данные всегда под рукой.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Кейс 2 -->
+                <div class="bg-[#111] border border-[#222] rounded-2xl overflow-hidden grid md:grid-cols-12 gap-0">
+                    <div class="md:col-span-5 bg-[#1A1A1A] p-8 flex items-center justify-center border-b md:border-b-0 md:border-r border-[#222]">
+                        <div class="text-center space-y-4">
+                            <i data-lucide="layout" class="text-[#B026FF] w-12 h-12 mx-auto"></i>
+                            <h4 class="text-white font-bold text-xl">Cyber/Neon UI Kit</h4>
+                            <p class="text-xs font-mono text-gray-500">Figma + Tilda Zero Block</p>
+                        </div>
+                    </div>
+                    <div class="md:col-span-7 p-8 md:p-10 space-y-6">
+                        <div>
+                            <h5 class="text-gray-500 text-sm uppercase tracking-wider mb-2 font-semibold">Задача</h5>
+                            <p class="text-gray-300 text-sm">Создать единую дизайн-систему для технологичного стартапа, чтобы ускорить сборку новых лендингов.</p>
+                        </div>
+                        <div>
+                            <h5 class="text-gray-500 text-sm uppercase tracking-wider mb-2 font-semibold">Решение</h5>
+                            <p class="text-gray-300 text-sm">Отрисован UI Kit в темной теме с неоновыми акцентами: кнопки, формы, карточки, типографика. Все элементы перенесены в библиотеку Tilda.</p>
+                        </div>
+                        <div class="pt-4 border-t border-[#222]">
+                            <h5 class="text-sm uppercase tracking-wider mb-2 font-semibold text-[#B026FF]">Результат</h5>
+                            <p class="text-white">Сборка новых страниц стала занимать в 2 раза меньше времени, дизайн стал консистентным.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок 5: Контакты и Форма -->
+    <section id="contact" class="py-24 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-[#39FF14]/5 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#B026FF]/5 rounded-full blur-[100px] pointer-events-none"></div>
+        
+        <div class="container mx-auto px-6 max-w-6xl relative z-10 grid md:grid-cols-2 gap-16">
+            <div>
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">
+                    Готовы начать <span class="text-[#39FF14]">работу?</span>
+                </h2>
+                <p class="text-gray-400 mb-10 text-lg">
+                    Опишите вашу задачу. Я свяжусь с вами в Telegram для обсуждения деталей и оценки проекта.
+                </p>
+                
+                <div class="space-y-6">
+                    <a href="https://t.me/Ekater5rina" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 text-gray-300 hover:text-[#39FF14] transition-colors group">
+                        <div class="w-12 h-12 rounded-full bg-[#1A1A1A] flex items-center justify-center group-hover:bg-[#39FF14]/20 transition-colors">
+                            <i data-lucide="send" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-white group-hover:text-[#39FF14] transition-colors">Telegram</p>
+                            <p class="text-sm">@Ekater5rina</p>
+                        </div>
+                    </a>
+                    <a href="#" class="flex items-center gap-4 text-gray-300 hover:text-[#39FF14] transition-colors group">
+                        <div class="w-12 h-12 rounded-full bg-[#1A1A1A] flex items-center justify-center group-hover:bg-[#39FF14]/20 transition-colors">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-white group-hover:text-[#39FF14] transition-colors">GitHub</p>
+                            <p class="text-sm">/your-github</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Форма -->
+            <div class="bg-[#111] p-8 md:p-10 rounded-2xl border border-[#222] shadow-2xl relative overflow-hidden">
+                
+                <!-- Экран успеха (скрыт по умолчанию) -->
+                <div id="successMessage" class="absolute inset-0 bg-[#111] flex-col items-center justify-center text-center p-8 z-20 hidden">
+                    <i data-lucide="check-circle-2" class="text-[#39FF14] w-16 h-16 mb-6"></i>
+                    <h3 class="text-2xl font-bold text-white mb-2">Заявка отправлена!</h3>
+                    <p class="text-gray-400">Данные улетели в Google Sheets и Telegram. Я скоро свяжусь с вами.</p>
+                </div>
+
+                <h3 class="text-2xl font-bold text-white mb-8">Оставить заявку</h3>
+                <form id="contactForm" class="space-y-6 relative z-10">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-2">Ваше имя / Ник в ТГ</label>
+                        <input type="text" required placeholder="@username" class="w-full bg-[#1A1A1A] border border-[#333] rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#39FF14] transition-colors placeholder-gray-600">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-2">Краткое описание задачи</label>
+                        <textarea required rows="4" placeholder="Нужен сайт на Tilda и бот..." class="w-full bg-[#1A1A1A] border border-[#333] rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#39FF14] transition-colors resize-none placeholder-gray-600"></textarea>
+                    </div>
+                    <button type="submit" id="submitBtn" class="w-full py-4 rounded-lg flex justify-center items-center gap-2 bg-[#39FF14] text-black font-bold hover:shadow-[0_0_25px_rgba(57,255,20,0.6)] transition-all duration-300">
+                        <span id="btnText">Отправить задачу</span>
+                        <i data-lucide="chevron-right" id="btnIcon" class="w-5 h-5"></i>
+                    </button>
+                    <p class="text-xs text-center text-gray-600">Нажимая кнопку, симулируется отправка webhook-а.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="border-t border-[#1A1A1A] py-8 text-center text-sm text-gray-500">
+        <div class="container mx-auto px-6">
+            <p>© 2024 Digital Integrator. Vanilla HTML version.</p>
+        </div>
+    </footer>
+
+    <!-- Скрипты (Логика сайта) -->
+    <script>
+        // Инициализация иконок Lucide
+        lucide.createIcons();
+
+        // 1. Анимация шапки при скролле
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-[#0D0D0D]/90', 'backdrop-blur-md', 'border-[#1A1A1A]', 'py-4');
+                navbar.classList.remove('bg-transparent', 'border-transparent', 'py-6');
+            } else {
+                navbar.classList.remove('bg-[#0D0D0D]/90', 'backdrop-blur-md', 'border-[#1A1A1A]', 'py-4');
+                navbar.classList.add('bg-transparent', 'border-transparent', 'py-6');
+            }
+        });
+
+        // 2. Мобильное бургер-меню
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIcon = document.getElementById('menuIcon');
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenu.classList.remove('max-h-0', 'py-0', 'opacity-0');
+                mobileMenu.classList.add('max-h-96', 'py-6', 'opacity-100');
+                menuIcon.setAttribute('data-lucide', 'x');
+            } else {
+                mobileMenu.classList.add('max-h-0', 'py-0', 'opacity-0');
+                mobileMenu.classList.remove('max-h-96', 'py-6', 'opacity-100');
+                menuIcon.setAttribute('data-lucide', 'menu');
+            }
+            lucide.createIcons(); // Перерисовываем иконку (крестик или бургер)
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if(isMenuOpen) toggleMenu();
+            });
+        });
+
+        // 3. Логика карусели / слайдера
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slider-item');
+        const totalSlides = slides.length;
+        const track = document.getElementById('sliderTrack');
+        const dotsContainer = document.getElementById('sliderDots');
+
+        // Создаем точки-индикаторы
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('button');
+            dot.className = `h-2 rounded-full transition-all duration-300 ${i === 0 ? 'bg-gradient-to-r from-[#39FF14] to-[#B026FF] w-12' : 'bg-[#333] w-2 hover:bg-[#555]'}`;
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        }
+        const dots = dotsContainer.childNodes;
+
+        function updateSlider() {
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.className = 'h-2 rounded-full transition-all duration-300 bg-gradient-to-r from-[#39FF14] to-[#B026FF] w-12';
+                } else {
+                    dot.className = 'h-2 rounded-full transition-all duration-300 bg-[#333] w-2 hover:bg-[#555]';
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide === totalSlides - 1) ? 0 : currentSlide + 1;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide === 0) ? totalSlides - 1 : currentSlide - 1;
+            updateSlider();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlider();
+        }
+
+        document.getElementById('nextBtn').addEventListener('click', nextSlide);
+        document.getElementById('prevBtn').addEventListener('click', prevSlide);
+
+        // Свайпы для мобилок
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const sliderContainer = document.getElementById('sliderContainer');
+
+        sliderContainer.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+
+        sliderContainer.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, {passive: true});
+
+        function handleSwipe() {
+            const swipeDistance = touchStartX - touchEndX;
+            if (swipeDistance > 50) nextSlide();
+            if (swipeDistance < -50) prevSlide();
+        }
+
+        // 4. Обработка формы
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const btnIcon = document.getElementById('btnIcon');
+        const successMessage = document.getElementById('successMessage');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Состояние загрузки
+            submitBtn.style.opacity = '0.7';
+            submitBtn.style.cursor = 'wait';
+            btnText.innerText = 'Отправка...';
+            btnIcon.style.display = 'none';
+
+            // Имитация отправки данных
+            setTimeout(() => {
+                form.reset();
+                successMessage.classList.remove('hidden');
+                successMessage.classList.add('flex');
+                
+                // Возврат кнопки
+                submitBtn.style.opacity = '1';
+                submitBtn.style.cursor = 'pointer';
+                btnText.innerText = 'Отправить задачу';
+                btnIcon.style.display = 'block';
+
+                // Скрыть сообщение об успехе через 5 секунд
+                setTimeout(() => {
+                    successMessage.classList.add('hidden');
+                    successMessage.classList.remove('flex');
+                }, 5000);
+
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
