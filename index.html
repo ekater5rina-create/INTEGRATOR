@@ -360,6 +360,63 @@
                         </div>
                     </div>
 
+                    <!-- Карточка 7: TimeFlow Cyber Edition -->
+                    <div class="w-full flex-shrink-0 grid md:grid-cols-2 slider-item">
+                        <div class="h-64 md:h-[450px] bg-gradient-to-br from-[#B026FF]/30 to-[#0D0D0D] flex items-center justify-center relative overflow-hidden group cursor-pointer">
+                            <!-- Второе фото (Аналитика) - на заднем плане, появляется при наведении с легким зумом -->
+                            <img src="https://i.yapx.ru/dUEwS.png" alt="TimeFlow Analytics" class="absolute inset-0 w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 transform group-hover:scale-105 transition-all duration-700 z-0" />
+                            <!-- Первое фото (Интерфейс) - на переднем плане, исчезает при наведении -->
+                            <img src="https://i.yapx.ru/dUEwT.png" alt="TimeFlow UI" class="absolute inset-0 w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 opacity-100 group-hover:opacity-0 transition-all duration-700 z-10" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/20 to-transparent pointer-events-none z-20"></div>
+                        </div>
+                        <div class="p-8 md:p-12 flex flex-col justify-start bg-[#111] relative z-30 overflow-y-auto hide-scrollbar" style="max-height: 450px;">
+                            <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-transparent via-[#222] to-transparent hidden md:block"></div>
+                            <div class="flex flex-wrap gap-2 mb-4 shrink-0">
+                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">React</span>
+                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">Google Cloud API</span>
+                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">Analytics</span>
+                            </div>
+                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-3 leading-tight shrink-0">TimeFlow Cyber Edition</h3>
+                            <p class="text-gray-400 leading-relaxed mb-4 text-sm shrink-0">
+                                Интеллектуальный тайм-трекер в стиле «кибер-реализм» для глубокого анализа продуктивности. Приложение не просто замеряет время, а превращает его в структурированные данные, автоматически синхронизированные с облачной экосистемой Google.
+                            </p>
+                            
+                            <!-- Выпадающий блок "Подробнее" -->
+                            <details class="group cursor-pointer shrink-0 mb-6">
+                                <summary class="inline-flex items-center gap-2 text-[#B026FF] font-bold hover:text-white transition-colors outline-none select-none">
+                                    Подробнее о проекте <i data-lucide="chevron-down" class="group-open:rotate-180 transition-transform w-5 h-5"></i>
+                                </summary>
+                                <div class="text-gray-300 text-sm space-y-4 mt-4 pb-2 border-t border-[#222] pt-4 cursor-default">
+                                    <div>
+                                        <h4 class="text-white font-bold mb-2">🛠 Стек технологий:</h4>
+                                        <p class="text-gray-400">React, Tailwind CSS, Google Cloud API (Calendar & Tasks), Lucide Icons.</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-cyan-400 font-bold mb-2">🎯 Ключевой функционал:</h4>
+                                        <ul class="space-y-2 text-gray-400">
+                                            <li class="flex items-start gap-2"><span class="text-cyan-400 shrink-0">▹</span> <span><b class="text-gray-300">Двусторонняя синхронизация:</b> Завершенные сессии улетают в Google Calendar, а задачи импортируются из Google Tasks одним нажатием.</span></li>
+                                            <li class="flex items-start gap-2"><span class="text-cyan-400 shrink-0">▹</span> <span><b class="text-gray-300">Глубокая аналитика:</b> Мониторинг плана (160 часов), динамический годовой график и детализация по проектам (ядрам).</span></li>
+                                            <li class="flex items-start gap-2"><span class="text-cyan-400 shrink-0">▹</span> <span><b class="text-gray-300">Управление данными:</b> Ручная корректировка, динамическое создание категорий и продвинутый CSV-импорт (Toggl Track).</span></li>
+                                            <li class="flex items-start gap-2"><span class="text-cyan-400 shrink-0">▹</span> <span><b class="text-gray-300">Cyberpunk UI/UX:</b> Адаптивный неоновый интерфейс с «мини-режимом» для фокусировки и поддержкой горячих клавиш.</span></li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-[#39FF14] font-bold mb-2">🏆 Мои достижения в проекте:</h4>
+                                        <ul class="space-y-2 text-gray-400">
+                                            <li class="flex items-start gap-2"><span class="text-[#39FF14] shrink-0">▹</span> <span><b class="text-gray-300">Сложные интеграции:</b> Успешно реализована авторизация OAuth2 и работа с Google Calendar API v3 / Tasks API.</span></li>
+                                            <li class="flex items-start gap-2"><span class="text-[#39FF14] shrink-0">▹</span> <span><b class="text-gray-300">Data Parsing:</b> Написан мощный алгоритм для преобразования сырых отчетов CSV в структурированную базу логов.</span></li>
+                                            <li class="flex items-start gap-2"><span class="text-[#39FF14] shrink-0">▹</span> <span><b class="text-gray-300">Архитектура состояния:</b> Приложение мгновенно пересчитывает статистику за весь год при переключении фильтров, обрабатывая огромный массив данных без зависаний.</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </details>
+
+                            <a href="#contact" class="inline-flex items-center gap-2 text-white font-bold hover:text-[#B026FF] transition-colors w-max group/btn mt-auto shrink-0">
+                                Заказать похожий <i data-lucide="chevron-right" class="group-hover/btn:translate-x-1 transition-transform w-5 h-5"></i>
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             
