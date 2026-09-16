@@ -1,690 +1,656 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Базовые SEO теги -->
-    <title>Digital Integrator | Создание сайтов, Telegram-ботов и автоматизация</title>
-    <meta name="description" content="Разработка сайтов на Tilda, создание умных Telegram-ботов и дашбордов в Google Sheets. Автоматизация бизнес-процессов и цифровой дизайн.">
-    <meta name="keywords" content="создание сайтов, tilda, telegram боты, разработка ботов, google sheets, автоматизация бизнеса, digital интегратор, дашборды, ui kit">
-    <meta name="author" content="Digital Integrator">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Екатерина Колесникова | Внедрение веб-продуктов для бизнеса</title>
+  <meta name="description" content="Изучение процессов, проектирование и внедрение внутренних веб-продуктов, CRM, систем учета, дашбордов и интеграций для бизнеса.">
+  <meta name="author" content="Екатерина Колесникова">
+  <meta name="theme-color" content="#0b0d0c">
+  <link rel="canonical" href="https://ekater5rina-create.github.io/INTEGRATOR/">
 
-    <!-- Open Graph (для красивых ссылок в Telegram, VK, WhatsApp) -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Digital Integrator | Автоматизация и дизайн">
-    <meta property="og:description" content="Создаю цифровые экосистемы: от эстетичных визиток на Tilda до сложных Telegram-ботов с интеграцией в Google Sheets.">
-    <meta property="og:image" content="https://i.yapx.ru/dO7L5.jpg"> <!-- Твое фото будет на превью ссылки -->
-    <meta property="og:url" content="https://ТВОЙ-САЙТ.vercel.app/"> <!-- Замени на свою реальную ссылку -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Внедрение веб-продуктов для бизнеса | Екатерина Колесникова">
+  <meta property="og:description" content="Изучаю процессы и существующие инструменты, затем проектирую и внедряю подходящее веб-решение.">
+  <meta property="og:url" content="https://ekater5rina-create.github.io/INTEGRATOR/">
+  <meta property="og:image" content="https://ekater5rina-create.github.io/INTEGRATOR/assets/time-tracking.png">
+  <meta property="og:image:alt" content="Интерфейс внутреннего веб-продукта">
 
-    <!-- Подключаем Tailwind CSS для стилей -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Подключаем иконки Lucide -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <style>
+    :root {
+      --ink: #0b0d0c;
+      --surface: #111411;
+      --surface-soft: #171b18;
+      --paper: #f2f4ef;
+      --muted: #a8aea7;
+      --line: rgba(255, 255, 255, 0.14);
+      --accent: #b7ff3c;
+      --accent-ink: #101609;
+      --header-height: 72px;
+    }
 
-    <style>
-        html { scroll-behavior: smooth; }
-        ::selection { background-color: #B026FF; color: white; }
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    </style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--paper);
+      background: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+      text-rendering: optimizeLegibility;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; }
+
+    .skip-link {
+      position: fixed;
+      left: 16px;
+      top: -80px;
+      z-index: 100;
+      padding: 12px 16px;
+      color: var(--accent-ink);
+      background: var(--accent);
+      border-radius: 6px;
+      transition: top 160ms ease;
+    }
+    .skip-link:focus { top: 16px; }
+
+    .shell {
+      width: min(1180px, calc(100% - 48px));
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 50;
+      height: var(--header-height);
+      border-bottom: 1px solid transparent;
+      transition: background-color 180ms ease, border-color 180ms ease;
+    }
+    .site-header.is-scrolled {
+      background: rgba(11, 13, 12, 0.94);
+      border-color: var(--line);
+      backdrop-filter: blur(14px);
+    }
+    .nav {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      color: var(--accent-ink);
+      background: var(--accent);
+      border-radius: 6px;
+      font-size: 13px;
+    }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a {
+      color: #d7dbd5;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 150ms ease;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible { color: var(--accent); }
+
+    .icon-button {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      color: #fff;
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .icon-button svg { width: 20px; height: 20px; }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      padding: 0 20px;
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      color: var(--accent-ink);
+      background: var(--accent);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 150ms ease, background-color 150ms ease, color 150ms ease;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button:focus-visible { outline: 3px solid rgba(183, 255, 60, 0.35); outline-offset: 3px; }
+    .button.secondary { color: #fff; background: rgba(11, 13, 12, 0.35); border-color: rgba(255, 255, 255, 0.35); }
+    .button.secondary:hover { border-color: #fff; }
+    .button svg { width: 18px; height: 18px; }
+
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      background-color: #111;
+      background-image: url("assets/time-tracking.png");
+      background-position: center;
+      background-size: cover;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(5, 8, 6, 0.78);
+      z-index: 1;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 28%;
+      background: rgba(11, 13, 12, 0.82);
+      z-index: 1;
+    }
+    .hero-portrait {
+      position: absolute;
+      z-index: 0;
+      inset: 0 0 0 auto;
+      width: 43%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 22%;
+      opacity: 0.9;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      width: min(1180px, calc(100% - 48px));
+      margin-inline: auto;
+      padding: calc(var(--header-height) + 80px) 0 72px;
+    }
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+    .hero-name {
+      margin: 0 0 24px;
+      max-width: 900px;
+      color: #fff;
+      font-size: clamp(42px, 8vw, 104px);
+      line-height: 0.96;
+      font-weight: 820;
+    }
+    .hero h1 {
+      max-width: 760px;
+      margin: 0;
+      color: #fff;
+      font-size: clamp(25px, 4vw, 48px);
+      line-height: 1.08;
+      font-weight: 620;
+    }
+    .hero-copy {
+      max-width: 650px;
+      margin: 22px 0 0;
+      color: #d2d7d0;
+      font-size: 18px;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+
+    .section { padding: 112px 0; }
+    .section.light { color: #151815; background: var(--paper); }
+    .section.dark { background: var(--ink); }
+    .section.soft { background: var(--surface); }
+    .section-label {
+      margin: 0 0 18px;
+      color: #667064;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+    .dark .section-label, .soft .section-label { color: var(--accent); }
+    .section-title {
+      max-width: 900px;
+      margin: 0;
+      font-size: clamp(34px, 5vw, 66px);
+      line-height: 1.04;
+      font-weight: 780;
+    }
+    .section-intro {
+      max-width: 680px;
+      margin: 24px 0 0;
+      color: #566056;
+      font-size: 18px;
+    }
+    .dark .section-intro, .soft .section-intro { color: var(--muted); }
+
+    .task-list { margin-top: 64px; border-top: 1px solid #cdd2ca; }
+    .task-row {
+      display: grid;
+      grid-template-columns: 80px minmax(0, 1fr) minmax(240px, 0.7fr);
+      gap: 28px;
+      align-items: baseline;
+      padding: 30px 0;
+      border-bottom: 1px solid #cdd2ca;
+    }
+    .task-number { color: #707a6e; font: 700 13px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .task-name { margin: 0; font-size: clamp(24px, 3vw, 38px); line-height: 1.15; }
+    .task-text { margin: 0; color: #566056; }
+
+    .work-list { display: flex; flex-direction: column; margin-top: 64px; }
+    .work-time { order: 1; }
+    .work-cash { order: 2; }
+    .work-dashboard { order: 3; }
+    .work-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.55fr);
+      gap: 48px;
+      align-items: center;
+      padding: 56px 0;
+      border-top: 1px solid var(--line);
+    }
+    .work-item:last-child { border-bottom: 1px solid var(--line); }
+    .work-item:nth-child(even) .work-media { order: 2; }
+    .work-media {
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      background: #e7e9e5;
+      border-radius: 8px;
+    }
+    .work-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top left;
+      transition: transform 500ms ease;
+    }
+    .work-item:hover .work-media img { transform: scale(1.025); }
+    .work-kicker { margin: 0 0 10px; color: var(--accent); font-size: 13px; font-weight: 800; text-transform: uppercase; }
+    .work-copy h3 { margin: 0; font-size: clamp(28px, 4vw, 48px); line-height: 1.05; }
+    .work-copy p { margin: 20px 0 0; color: var(--muted); }
+    .work-points { margin: 24px 0 0; padding: 0; list-style: none; }
+    .work-points li { padding: 10px 0; border-top: 1px solid var(--line); color: #dde1db; }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 64px;
+      border-top: 1px solid #cdd2ca;
+      border-bottom: 1px solid #cdd2ca;
+    }
+    .service {
+      min-width: 0;
+      padding: 34px 34px 40px 0;
+    }
+    .service + .service { padding-left: 34px; border-left: 1px solid #cdd2ca; }
+    .service-icon { width: 28px; height: 28px; color: #394238; }
+    .service h3 { margin: 46px 0 14px; font-size: 24px; line-height: 1.2; }
+    .service p { margin: 0; color: #566056; }
+
+    .process { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 72px; margin-top: 64px; }
+    .process-note { color: var(--muted); font-size: 18px; }
+    .steps { border-top: 1px solid var(--line); }
+    .step { display: grid; grid-template-columns: 52px 1fr; gap: 20px; padding: 25px 0; border-bottom: 1px solid var(--line); }
+    .step span { color: var(--accent); font: 700 13px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .step h3 { margin: 0 0 8px; font-size: 22px; }
+    .step p { margin: 0; color: var(--muted); }
+
+    .contact { padding: 120px 0; color: #111; background: var(--accent); }
+    .contact-grid { display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: end; }
+    .contact h2 { max-width: 820px; margin: 0; font-size: clamp(42px, 7vw, 88px); line-height: 0.98; }
+    .contact p { max-width: 620px; margin: 24px 0 0; font-size: 18px; }
+    .contact .button { color: #fff; background: #111; border-color: #111; white-space: nowrap; }
+
+    .footer { padding: 28px 0; color: #8e958d; background: var(--ink); font-size: 14px; }
+    .footer-row { display: flex; justify-content: space-between; gap: 24px; }
+    .footer a { text-decoration: none; }
+    .footer a:hover { color: var(--accent); }
+
+    [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 520ms ease, transform 520ms ease; }
+    [data-reveal].is-visible { opacity: 1; transform: none; }
+
+    @media (max-width: 820px) {
+      :root { --header-height: 64px; }
+      .shell, .hero-inner { width: min(100% - 32px, 1180px); }
+      .icon-button { display: inline-flex; }
+      .nav-links {
+        position: fixed;
+        inset: var(--header-height) 0 auto;
+        display: none;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 0;
+        padding: 16px;
+        background: rgba(11, 13, 12, 0.98);
+        border-bottom: 1px solid var(--line);
+      }
+      .nav-links.is-open { display: flex; }
+      .nav-links a { padding: 14px 4px; font-size: 17px; border-bottom: 1px solid var(--line); }
+      .nav-links .button { margin-top: 12px; border-bottom: 1px solid var(--accent); }
+
+      .hero { min-height: 760px; background-position: 35% center; }
+      .hero-portrait {
+        width: 100%;
+        object-position: 58% 22%;
+        opacity: 0.5;
+      }
+      .hero-inner { padding-bottom: 52px; }
+      .hero-name { max-width: 640px; }
+      .hero-copy { font-size: 16px; }
+      .section { padding: 80px 0; }
+      .task-row { grid-template-columns: 42px 1fr; gap: 14px; }
+      .task-text { grid-column: 2; }
+      .work-item, .process, .contact-grid { grid-template-columns: 1fr; }
+      .work-item { gap: 28px; padding: 40px 0; }
+      .work-item:nth-child(even) .work-media { order: 0; }
+      .service-grid { grid-template-columns: 1fr; }
+      .service, .service + .service { padding: 28px 0; border-left: 0; border-bottom: 1px solid #cdd2ca; }
+      .service:last-child { border-bottom: 0; }
+      .service h3 { margin-top: 22px; }
+      .process { gap: 38px; }
+      .contact { padding: 84px 0; }
+      .contact .button { width: 100%; }
+    }
+
+    @media (max-width: 520px) {
+      .brand-text { max-width: 190px; font-size: 12px; }
+      .hero { min-height: 720px; }
+      .hero-name { font-size: 34px; line-height: 1.02; }
+      .hero-actions { flex-direction: column; }
+      .hero-actions .button { width: 100%; }
+      .work-media { aspect-ratio: 4 / 3; }
+      .work-copy h3 { font-size: 31px; }
+      .footer-row { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      [data-reveal] { opacity: 1; transform: none; }
+    }
+  </style>
 </head>
-<body class="min-h-screen bg-[#0D0D0D] text-gray-300 font-sans">
-    
-    <!-- Навигация -->
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 border-b bg-transparent border-transparent py-6">
-        <div class="container mx-auto px-6 max-w-6xl flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <i data-lucide="terminal" class="text-[#39FF14]"></i>
-                <span class="text-white font-bold text-xl tracking-wider">DIGITAL<span class="text-[#39FF14]">_INTEGRATOR</span></span>
-            </div>
-            <div class="hidden md:flex gap-8 text-sm font-medium">
-                <a href="#services" class="hover:text-[#39FF14] transition-colors">Услуги</a>
-                <a href="#portfolio" class="hover:text-[#39FF14] transition-colors">Портфолио</a>
-                <a href="#cases" class="hover:text-[#39FF14] transition-colors">Кейсы</a>
-                <a href="#contact" class="hover:text-[#39FF14] transition-colors">Контакты</a>
-            </div>
-            <a href="https://t.me/Ekater5rina" target="_blank" rel="noopener noreferrer" class="hidden md:block px-5 py-2 rounded-full border border-[#39FF14] text-[#39FF14] hover:bg-[#39FF14] hover:text-black transition-all duration-300 text-sm font-bold">
-                Связаться
-            </a>
-            
-            <button id="mobileMenuBtn" class="md:hidden text-gray-300 hover:text-[#39FF14] transition-colors">
-                <i data-lucide="menu" id="menuIcon"></i>
-            </button>
-        </div>
-        
-        <div id="mobileMenu" class="md:hidden absolute top-full left-0 w-full bg-[#0D0D0D]/95 backdrop-blur-xl border-b border-[#1A1A1A] transition-all duration-300 overflow-hidden max-h-0 py-0 opacity-0">
-            <div class="flex flex-col gap-6 px-6">
-                <a href="#services" class="mobile-link text-lg font-medium hover:text-[#39FF14] transition-colors">Услуги</a>
-                <a href="#portfolio" class="mobile-link text-lg font-medium hover:text-[#39FF14] transition-colors">Портфолио</a>
-                <a href="#cases" class="mobile-link text-lg font-medium hover:text-[#39FF14] transition-colors">Кейсы</a>
-                <a href="#contact" class="mobile-link text-lg font-medium hover:text-[#39FF14] transition-colors">Контакты</a>
-                <a href="https://t.me/Ekater5rina" target="_blank" rel="noopener noreferrer" class="mt-2 py-4 rounded-lg text-center bg-[#39FF14] text-black font-bold hover:shadow-[0_0_25px_rgba(57,255,20,0.6)] transition-all duration-300">
-                    Связаться в Telegram
-                </a>
-            </div>
-        </div>
-    </nav>
+<body>
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
 
-    <!-- Блок 1: Hero-экран -->
-    <section class="relative pt-40 pb-20 md:pt-48 md:pb-32 overflow-hidden">
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-[#39FF14]/5 rounded-full blur-[100px] pointer-events-none"></div>
-        <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-[#B026FF]/10 rounded-full blur-[80px] pointer-events-none"></div>
-        
-        <div class="container mx-auto px-6 max-w-6xl relative z-10 grid md:grid-cols-2 gap-12 items-center">
-            <div class="flex flex-col items-start gap-6">
-                <div class="px-4 py-1 rounded-full border border-[#1A1A1A] bg-[#141414] text-xs font-mono flex items-center gap-2">
-                    <div class="w-2 h-2 rounded-full bg-[#B026FF] animate-pulse"></div>
-                    Доступен для новых проектов
-                </div>
-                <!-- Важно для SEO: Заголовок H1 (должен быть один на странице) -->
-                <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight">
-                    Автоматизация бизнес-процессов и <span class="bg-gradient-to-r from-[#39FF14] to-[#B026FF] text-transparent bg-clip-text">цифровой дизайн</span>.
-                </h1>
-                <p class="text-lg md:text-xl text-gray-400 max-w-lg leading-relaxed">
-                    Создаю экосистемы: от эстетичных визиток до сложных Telegram-ботов с интеграцией в Google Sheets.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 mt-4 w-full sm:w-auto">
-                    <a href="https://t.me/Ekater5rina" target="_blank" rel="noopener noreferrer" class="px-8 py-4 rounded-lg text-center bg-[#39FF14] text-black font-bold hover:shadow-[0_0_25px_rgba(57,255,20,0.6)] transition-all duration-300">
-                        Обсудить проект
-                    </a>
-                    <a href="#cases" class="px-8 py-4 rounded-lg text-center border border-[#333] text-white hover:bg-[#1A1A1A] transition-colors">
-                        Смотреть кейсы
-                    </a>
-                </div>
-            </div>
-            
-            <!-- Фотография профиля -->
-            <div class="relative h-[400px] w-full flex justify-center items-center">
-                <div class="absolute inset-0 bg-gradient-to-tr from-[#39FF14]/20 to-[#B026FF]/20 blur-3xl rounded-full z-0 opacity-40 hover:opacity-70 transition-opacity peer"></div>
-                
-                <div class="w-full max-w-[320px] aspect-[4/5] sm:h-96 relative z-10 rounded-2xl p-[2px] bg-gradient-to-br from-[#39FF14] via-[#222] to-[#B026FF] group hover:shadow-[0_0_30px_rgba(176,38,255,0.4)] transition-all duration-500">
-                    <div class="w-full h-full bg-[#111] rounded-2xl overflow-hidden relative">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0D0D0D] via-transparent to-transparent z-10 opacity-90"></div>
-                        <div class="absolute top-0 left-0 w-full h-full bg-[#B026FF]/10 mix-blend-overlay z-10 pointer-events-none group-hover:opacity-0 transition-opacity"></div>
-                        
-                        <a href="https://yapx.ru/image/dO7L5" target="_blank" rel="noopener noreferrer" title="Фотография загружена на фотохостинг yapx.ru" class="block w-full h-full">
-                            <img src="https://i.yapx.ru/dO7L5.jpg" alt="" class="w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 transition-all duration-700 transform group-hover:scale-105" />
-                        </a>
-                        
-                        <div class="absolute bottom-5 left-5 right-5 z-20 backdrop-blur-md bg-black/50 border border-white/10 rounded-xl p-3 flex items-center justify-between group-hover:border-[#39FF14]/50 transition-colors">
-                            <div>
-                                <p class="text-[#39FF14] font-mono text-[10px] uppercase tracking-widest font-bold mb-1">System Status</p>
-                                <p class="text-white text-sm font-bold tracking-wider">ONLINE_</p>
-                            </div>
-                            <div class="w-3 h-3 bg-[#39FF14] rounded-full animate-pulse shadow-[0_0_10px_#39FF14]"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <header class="site-header" id="siteHeader">
+    <div class="shell nav">
+      <a class="brand" href="#top" aria-label="На главную">
+        <span class="brand-mark">EK</span>
+        <span class="brand-text">ВЕБ-ПРОДУКТЫ ДЛЯ БИЗНЕСА</span>
+      </a>
+
+      <button class="icon-button" id="menuButton" type="button" aria-label="Открыть меню" aria-expanded="false">
+        <i data-lucide="menu"></i>
+      </button>
+
+      <nav class="nav-links" id="navLinks" aria-label="Основная навигация">
+        <a href="#services">Услуги</a>
+        <a href="#work">Работы</a>
+        <a href="#process">Как работаю</a>
+        <a class="button" href="https://t.me/Ekater5rina" target="_blank" rel="noopener noreferrer">
+          <i data-lucide="message-circle"></i>
+          Обсудить задачу
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <img class="hero-portrait" src="https://i.yapx.ru/dO7L5.jpg" alt="Екатерина Колесникова" width="1280" height="1600">
+      <div class="hero-inner">
+        <p class="eyebrow" data-reveal>Екатерина Колесникова</p>
+        <p class="hero-name" data-reveal>Изучить.<br>Спроектировать.<br>Внедрить.</p>
+        <h1 id="hero-title" data-reveal>Веб-продукты под реальные процессы бизнеса</h1>
+        <p class="hero-copy" data-reveal>Изучаю, как сейчас устроена работа заказчика, какие данные и инструменты уже используются, а затем проектирую и внедряю подходящее веб-решение.</p>
+        <div class="hero-actions" data-reveal>
+          <a class="button" href="https://t.me/Ekater5rina" target="_blank" rel="noopener noreferrer">
+            <i data-lucide="message-circle"></i>
+            Обсудить задачу
+          </a>
+          <a class="button secondary" href="#work">
+            <i data-lucide="arrow-down"></i>
+            Посмотреть работы
+          </a>
         </div>
+      </div>
     </section>
 
-    <!-- Блок 2: Стек технологий -->
-    <section class="py-12 border-y border-[#1A1A1A] bg-[#0A0A0A]">
-        <div class="container mx-auto px-6 max-w-6xl">
-            <h2 class="sr-only">Стек технологий</h2> <!-- Скрытый заголовок для SEO -->
-            <p class="text-center text-sm text-gray-500 uppercase tracking-widest mb-8">Стек технологий & инструменты</p>
-            <div class="flex flex-wrap justify-center gap-8 md:gap-16 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
-                <div class="flex items-center gap-2 font-bold text-xl"><div class="w-6 h-6 bg-white rounded-sm flex items-center justify-center text-black text-xs">T</div> Tilda</div>
-                <div class="flex items-center gap-2"><i data-lucide="send"></i> Telegram API</div>
-                <div class="flex items-center gap-2"><i data-lucide="file-spreadsheet"></i> Google Sheets</div>
-                <div class="flex items-center gap-2"><i data-lucide="github"></i> GitHub</div>
-                <div class="flex items-center gap-2"><i data-lucide="triangle"></i> Vercel</div>
-                <div class="flex items-center gap-2"><i data-lucide="code-2"></i> VS Code</div>
-            </div>
+    <section class="section light" id="services">
+      <div class="shell">
+        <p class="section-label" data-reveal>Подход к задаче</p>
+        <h2 class="section-title" data-reveal>Не навязываю готовый шаблон. Сначала разбираюсь в вашей работе.</h2>
+        <p class="section-intro" data-reveal>Изучаю процессы, таблицы, документы и действующие системы, чтобы веб-продукт дополнял бизнес, а не создавал ещё один неудобный инструмент.</p>
+
+        <div class="task-list">
+          <article class="task-row" data-reveal>
+            <span class="task-number">01</span>
+            <h3 class="task-name">Исследование процесса</h3>
+            <p class="task-text">Кто и как работает сейчас, какие данные используются, где возникают повторы, задержки и ошибки.</p>
+          </article>
+          <article class="task-row" data-reveal>
+            <span class="task-number">02</span>
+            <h3 class="task-name">Проектирование решения</h3>
+            <p class="task-text">Пользователи, роли, сценарии, структура данных, интерфейсы и связи с существующими сервисами.</p>
+          </article>
+          <article class="task-row" data-reveal>
+            <span class="task-number">03</span>
+            <h3 class="task-name">Разработка веб-продукта</h3>
+            <p class="task-text">Внутреннее приложение, CRM, калькулятор, дашборд или другой рабочий инструмент под задачу.</p>
+          </article>
+          <article class="task-row" data-reveal>
+            <span class="task-number">04</span>
+            <h3 class="task-name">Внедрение и развитие</h3>
+            <p class="task-text">Подключение данных, тестирование сценариев, инструкции и доработка по итогам реальной работы.</p>
+          </article>
         </div>
+      </div>
     </section>
 
-    <!-- Блок 3: Услуги -->
-    <section id="services" class="py-24">
-        <div class="container mx-auto px-6 max-w-6xl">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-16 text-center">
-                Что я <span class="text-[#39FF14]">создаю</span>
-            </h2>
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="bg-[#111] border border-[#222] p-8 rounded-2xl transition-all duration-300 hover:shadow-[0_0_20px_rgba(57,255,20,0.3)] hover:border-[#39FF14] group">
-                    <div class="w-14 h-14 rounded-xl bg-[#1A1A1A] flex items-center justify-center mb-6 group-hover:bg-[#39FF14]/10 transition-colors">
-                        <i data-lucide="bot" class="text-gray-400 group-hover:text-[#39FF14] transition-colors w-7 h-7"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-4">Разработка и Интеграции</h3>
-                    <p class="text-gray-400 leading-relaxed text-sm">
-                        Создание Telegram-ботов, синхронизация с таблицами, настройка уведомлений и полная автоматизация процесса приема заказов.
-                    </p>
-                </div>
+    <section class="section dark" id="work">
+      <div class="shell">
+        <p class="section-label" data-reveal>Примеры работ</p>
+        <h2 class="section-title" data-reveal>Разные задачи — один принцип: продукт должен вписаться в работу</h2>
+        <p class="section-intro" data-reveal>В портфолио используются обезличенные демонстрационные данные.</p>
 
-                <div class="bg-[#111] border border-[#222] p-8 rounded-2xl transition-all duration-300 hover:shadow-[0_0_20px_rgba(176,38,255,0.3)] hover:border-[#B026FF] group">
-                    <div class="w-14 h-14 rounded-xl bg-[#1A1A1A] flex items-center justify-center mb-6 group-hover:bg-[#B026FF]/10 transition-colors">
-                        <i data-lucide="bar-chart-3" class="text-gray-400 group-hover:text-[#B026FF] transition-colors w-7 h-7"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-4">Аналитика и Данные</h3>
-                    <p class="text-gray-400 leading-relaxed text-sm">
-                        Профессиональные дашборды в Google Sheets, визуализация KPI и настройка прозрачной отчетности «в один клик».
-                    </p>
-                </div>
-
-                <div class="bg-[#111] border border-[#222] p-8 rounded-2xl transition-all duration-300 hover:shadow-[0_0_20px_rgba(57,255,20,0.3)] hover:border-[#39FF14] group">
-                    <div class="w-14 h-14 rounded-xl bg-[#1A1A1A] flex items-center justify-center mb-6 group-hover:bg-[#39FF14]/10 transition-colors">
-                        <i data-lucide="layout" class="text-gray-400 group-hover:text-[#39FF14] transition-colors w-7 h-7"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-4">Дизайн и Веб</h3>
-                    <p class="text-gray-400 leading-relaxed text-sm">
-                        Создание стильных сайтов на Tilda, разработка UI-китов под ваш бренд, а также дизайн цифровых и печатных визиток.
-                    </p>
-                </div>
+        <div class="work-list">
+          <article class="work-item work-dashboard" data-reveal>
+            <div class="work-media">
+              <img src="assets/financial-dashboard.png" alt="Финансовый и производственный дашборд" loading="lazy" width="1903" height="983">
             </div>
+            <div class="work-copy">
+              <p class="work-kicker">Финансы и производство</p>
+              <h3>Дашборд руководителя</h3>
+              <p>Единый экран с итогами, планом и фактом, выручкой, себестоимостью, маржой и производственными показателями.</p>
+              <ul class="work-points">
+                <li>Периоды и сравнение показателей</li>
+                <li>План-факт по выручке и выпуску</li>
+                <li>Рейтинги продуктов и направлений</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="work-item work-cash" data-reveal>
+            <div class="work-media">
+              <img src="assets/cash-accounting.png" alt="Веб-приложение для учета наличных операций" loading="lazy" width="1543" height="929">
+            </div>
+            <div class="work-copy">
+              <p class="work-kicker">Внутреннее веб-приложение</p>
+              <h3>Учёт наличных операций</h3>
+              <p>Интерфейс для внесения приходов и расходов с категориями, комментариями, документами и историей операций.</p>
+              <ul class="work-points">
+                <li>Приходы и расходы по компаниям</li>
+                <li>Прикрепление подтверждающих документов</li>
+                <li>Редактирование и просмотр истории</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="work-item work-time" data-reveal>
+            <div class="work-media">
+              <img src="assets/time-tracking.png" alt="Приложение для учета рабочего времени и задач" loading="lazy" width="1517" height="1036">
+            </div>
+            <div class="work-copy">
+              <p class="work-kicker">Команда и проекты</p>
+              <h3>Учёт рабочего времени</h3>
+              <p>Рабочее приложение с таймером, проектами, задачами, журналом записей и статистикой за период.</p>
+              <ul class="work-points">
+                <li>Таймер по проектам и типам работ</li>
+                <li>Журнал и корректировка записей</li>
+                <li>Статистика загрузки за месяц</li>
+              </ul>
+            </div>
+          </article>
         </div>
+      </div>
     </section>
 
-    <!-- Блок: Интерактивная карусель портфолио -->
-    <section id="portfolio" class="py-24 bg-[#0A0A0A] border-t border-[#1A1A1A]">
-        <div class="container mx-auto px-6 max-w-6xl">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
-                <div>
-                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-                        Галерея <span class="text-[#B026FF]">работ</span>
-                    </h2>
-                    <p class="text-gray-400 max-w-lg">Примеры сайтов, ботов и систем, которые я могу реализовать для вашего проекта.</p>
-                </div>
-                <div class="flex gap-4">
-                    <button id="prevBtn" class="w-12 h-12 rounded-full border border-[#333] flex items-center justify-center hover:border-[#B026FF] hover:text-[#B026FF] transition-colors bg-[#111] text-gray-400" aria-label="Предыдущий слайд">
-                        <i data-lucide="chevron-left"></i>
-                    </button>
-                    <button id="nextBtn" class="w-12 h-12 rounded-full border border-[#333] flex items-center justify-center hover:border-[#39FF14] hover:text-[#39FF14] transition-colors bg-[#111] text-gray-400" aria-label="Следующий слайд">
-                        <i data-lucide="chevron-right"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Контейнер слайдера -->
-            <div id="sliderContainer" class="relative overflow-hidden rounded-2xl border border-[#222] bg-[#111] shadow-2xl">
-                <div id="sliderTrack" class="flex transition-transform duration-500 ease-in-out" style="transform: translateX(0%);">
-                    
-                    <!-- Слайд 1: Лендинг (Видео) -->
-                    <div class="w-full flex-shrink-0 grid md:grid-cols-2 slider-item">
-                        <div class="h-64 md:h-[450px] bg-gradient-to-br from-[#39FF14]/40 to-[#0D0D0D] flex items-center justify-center relative overflow-hidden">
-                            <div class="absolute inset-0 w-full h-full bg-black z-10">
-                                <iframe src="https://kinescope.io/embed/wbF7ioMvJpgpR7Pd6jcbco" title="Видео презентация лендинга" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;" frameborder="0" allowfullscreen class="w-full h-full"></iframe>
-                                <div class="absolute inset-0 bg-gradient-to-t from-[#111] h-16 top-auto via-[#111]/50 to-transparent pointer-events-none z-20"></div>
-                            </div>
-                        </div>
-                        <div class="p-8 md:p-12 flex flex-col justify-center bg-[#111] relative z-20">
-                            <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-transparent via-[#222] to-transparent hidden md:block"></div>
-                            <div class="flex flex-wrap gap-2 mb-6">
-                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">Tilda</span>
-                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">Web Design</span>
-                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">Dark Theme</span>
-                            </div>
-                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight">Лендинг для стартапа</h3>
-                            <p class="text-gray-400 leading-relaxed mb-10 text-lg">Анимации по скроллу, 3D-элементы, сложная верстка в Zero Block и интеграция с формой сбора контактов.</p>
-                            <a href="#contact" class="inline-flex items-center gap-2 text-white font-bold hover:text-[#39FF14] transition-colors w-max group">
-                                Заказать похожий <i data-lucide="chevron-right" class="group-hover:translate-x-1 transition-transform w-5 h-5"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Слайд 2: BI Дашборд -->
-                    <div class="w-full flex-shrink-0 grid md:grid-cols-2 slider-item">
-                        <div class="h-64 md:h-[450px] bg-gradient-to-br from-cyan-500/40 to-[#0D0D0D] flex items-center justify-center relative overflow-hidden group cursor-pointer">
-                            <img src="https://i.yapx.ru/dO8BO.jpg" alt="" class="absolute inset-0 w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/20 to-transparent pointer-events-none"></div>
-                        </div>
-                        <div class="p-8 md:p-12 flex flex-col justify-center bg-[#111] relative z-20">
-                            <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-transparent via-[#222] to-transparent hidden md:block"></div>
-                            <div class="flex flex-wrap gap-2 mb-6">
-                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">Аналитика</span>
-                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">Data Viz</span>
-                            </div>
-                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight">Корпоративный BI-Дашборд</h3>
-                            <p class="text-gray-400 leading-relaxed mb-10 text-lg">Профессиональная сводка для руководителей: визуализация ключевых показателей (KPI), мониторинг планов и авто-обновление метрик.</p>
-                            <a href="#contact" class="inline-flex items-center gap-2 text-white font-bold hover:text-[#39FF14] transition-colors w-max group">
-                                Заказать похожий <i data-lucide="chevron-right" class="group-hover:translate-x-1 transition-transform w-5 h-5"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Слайд 3: Бот-менеджер -->
-                    <div class="w-full flex-shrink-0 grid md:grid-cols-2 slider-item">
-                        <div class="h-64 md:h-[450px] bg-gradient-to-br from-[#B026FF]/40 to-[#0D0D0D] flex items-center justify-center relative overflow-hidden group cursor-pointer">
-                            <img src="https://i.yapx.ru/dO7je.jpg" alt="" class="absolute inset-0 w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/20 to-transparent pointer-events-none"></div>
-                        </div>
-                        <div class="p-8 md:p-12 flex flex-col justify-center bg-[#111] relative z-20">
-                            <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-transparent via-[#222] to-transparent hidden md:block"></div>
-                            <div class="flex flex-wrap gap-2 mb-6">
-                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">Telegram API</span>
-                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">Интеграция</span>
-                            </div>
-                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight">Бот-менеджер для бизнеса</h3>
-                            <p class="text-gray-400 leading-relaxed mb-10 text-lg">Автоматическая обработка заявок, ответы на частые вопросы и маршрутизация клиентов прямо в мессенджере.</p>
-                            <a href="#contact" class="inline-flex items-center gap-2 text-white font-bold hover:text-[#39FF14] transition-colors w-max group">
-                                Заказать похожий <i data-lucide="chevron-right" class="group-hover:translate-x-1 transition-transform w-5 h-5"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Слайд 4: CRM -->
-                    <div class="w-full flex-shrink-0 grid md:grid-cols-2 slider-item">
-                        <div class="h-64 md:h-[450px] bg-gradient-to-br from-blue-500/40 to-[#0D0D0D] flex items-center justify-center relative overflow-hidden group cursor-pointer">
-                            <img src="https://i.yapx.ru/dO7jg.jpg" alt="" class="absolute inset-0 w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/20 to-transparent pointer-events-none"></div>
-                        </div>
-                        <div class="p-8 md:p-12 flex flex-col justify-center bg-[#111] relative z-20">
-                            <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-transparent via-[#222] to-transparent hidden md:block"></div>
-                            <div class="flex flex-wrap gap-2 mb-6">
-                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">Google Sheets</span>
-                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">Аналитика</span>
-                            </div>
-                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight">Умная CRM в таблицах</h3>
-                            <p class="text-gray-400 leading-relaxed mb-10 text-lg">Сводка KPI, авто-подсчет доходов/расходов и генерация красивых графиков для владельца бизнеса.</p>
-                            <a href="#contact" class="inline-flex items-center gap-2 text-white font-bold hover:text-[#39FF14] transition-colors w-max group">
-                                Заказать похожий <i data-lucide="chevron-right" class="group-hover:translate-x-1 transition-transform w-5 h-5"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Слайд 5: UI Kit -->
-                    <div class="w-full flex-shrink-0 grid md:grid-cols-2 slider-item">
-                        <div class="h-64 md:h-[450px] bg-gradient-to-br from-pink-500/40 to-[#0D0D0D] flex items-center justify-center relative overflow-hidden group cursor-pointer">
-                            <img src="https://i.yapx.ru/dO7jd.jpg" alt="" class="absolute inset-0 w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/20 to-transparent pointer-events-none"></div>
-                        </div>
-                        <div class="p-8 md:p-12 flex flex-col justify-center bg-[#111] relative z-20">
-                            <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-transparent via-[#222] to-transparent hidden md:block"></div>
-                            <div class="flex flex-wrap gap-2 mb-6">
-                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">Figma</span>
-                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">UI/UX</span>
-                            </div>
-                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight">Neon/Cyber UI Kit</h3>
-                            <p class="text-gray-400 leading-relaxed mb-10 text-lg">Готовый набор кнопок, форм и карточек для быстрой сборки технологичных и стильных интерфейсов.</p>
-                            <a href="#contact" class="inline-flex items-center gap-2 text-white font-bold hover:text-[#39FF14] transition-colors w-max group">
-                                Заказать похожий <i data-lucide="chevron-right" class="group-hover:translate-x-1 transition-transform w-5 h-5"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Карточка 6: Система финансового учета -->
-                    <div class="w-full flex-shrink-0 grid md:grid-cols-2 slider-item">
-                        <div class="h-64 md:h-[450px] bg-gradient-to-br from-green-500/40 to-[#0D0D0D] flex items-center justify-center relative overflow-hidden group cursor-pointer">
-                            <img src="https://i.yapx.ru/dUBaF.png" alt="Система финансового учета" class="absolute inset-0 w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/20 to-transparent pointer-events-none"></div>
-                        </div>
-                        <div class="p-8 md:p-12 flex flex-col justify-start bg-[#111] relative z-20 overflow-y-auto hide-scrollbar" style="max-height: 450px;">
-                            <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-transparent via-[#222] to-transparent hidden md:block"></div>
-                            <div class="flex flex-wrap gap-2 mb-4 shrink-0">
-                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">React</span>
-                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">Web App</span>
-                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">Google API</span>
-                            </div>
-                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-3 leading-tight shrink-0">Финансовый учет (Web App)</h3>
-                            <p class="text-gray-400 leading-relaxed mb-4 text-sm shrink-0">
-                                Разработка мобильного веб-приложения (SPA) для автоматизации учета приходов и расходов компании. Проект создан для замены неудобных отчетов в мессенджерах: теперь сотрудники вносят данные через удобный интерфейс, а информация структурированно сохраняется в облачной БД с моментальным уведомлением руководства.
-                            </p>
-                            
-                            <!-- Выпадающий блок "Подробнее" -->
-                            <details class="group cursor-pointer shrink-0 mb-6">
-                                <summary class="inline-flex items-center gap-2 text-[#39FF14] font-bold hover:text-white transition-colors outline-none select-none">
-                                    Подробнее о проекте <i data-lucide="chevron-down" class="group-open:rotate-180 transition-transform w-5 h-5"></i>
-                                </summary>
-                                <div class="text-gray-300 text-sm space-y-4 mt-4 pb-2 border-t border-[#222] pt-4 cursor-default">
-                                    <div>
-                                        <h4 class="text-white font-bold mb-2">🛠 Стек технологий:</h4>
-                                        <ul class="list-disc pl-5 space-y-1 text-gray-400">
-                                            <li><b class="text-gray-300">Frontend:</b> React, Tailwind CSS, HTML/JS.</li>
-                                            <li><b class="text-gray-300">Backend & БД:</b> Google Apps Script, Google Sheets API, Google Drive API.</li>
-                                            <li><b class="text-gray-300">Интеграции:</b> Telegram Bot API.</li>
-                                            <li><b class="text-gray-300">Хостинг:</b> GitHub Pages.</li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <h4 class="text-[#B026FF] font-bold mb-2">🎯 Ключевые функции:</h4>
-                                        <ul class="space-y-2 text-gray-400">
-                                            <li class="flex items-start gap-2"><span class="text-[#B026FF] shrink-0">▹</span> <span><b class="text-gray-300">Авторизация:</b> Вход по паролю с привязкой сотрудника к компаниям.</span></li>
-                                            <li class="flex items-start gap-2"><span class="text-[#B026FF] shrink-0">▹</span> <span><b class="text-gray-300">Умная форма:</b> Выбор типа операции, категории, автоформат дат и загрузка чеков.</span></li>
-                                            <li class="flex items-start gap-2"><span class="text-[#B026FF] shrink-0">▹</span> <span><b class="text-gray-300">TG-уведомления:</b> Мгновенная отправка отчетов руководителю через бота.</span></li>
-                                            <li class="flex items-start gap-2"><span class="text-[#B026FF] shrink-0">▹</span> <span><b class="text-gray-300">Сохранение файлов:</b> Конвертация (Base64) и загрузка чеков на Google Drive.</span></li>
-                                            <li class="flex items-start gap-2"><span class="text-[#B026FF] shrink-0">▹</span> <span><b class="text-gray-300">Mobile-first & CRUD:</b> Адаптив, кэширование (localStorage), редактирование данных по ID без дублей.</span></li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <h4 class="text-[#39FF14] font-bold mb-2">📈 Ценность для бизнеса:</h4>
-                                        <p class="text-gray-400">Проект полностью решил проблему потери чеков и финансовой путаницы в чатах. Сбор данных автоматизирован, а руководство получило прозрачный контроль за наличными средствами в реальном времени.</p>
-                                    </div>
-                                </div>
-                            </details>
-
-                            <a href="#contact" class="inline-flex items-center gap-2 text-white font-bold hover:text-[#39FF14] transition-colors w-max group/btn mt-auto shrink-0">
-                                Заказать похожий <i data-lucide="chevron-right" class="group-hover/btn:translate-x-1 transition-transform w-5 h-5"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Карточка 7: TimeFlow Cyber Edition -->
-                    <div class="w-full flex-shrink-0 grid md:grid-cols-2 slider-item">
-                        <div class="h-64 md:h-[450px] bg-gradient-to-br from-[#B026FF]/30 to-[#0D0D0D] flex items-center justify-center relative overflow-hidden group cursor-pointer">
-                            <!-- Второе фото (Аналитика) - на заднем плане, появляется при наведении с легким зумом -->
-                            <img src="https://i.yapx.ru/dUEwS.png" alt="TimeFlow Analytics" class="absolute inset-0 w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 transform group-hover:scale-105 transition-all duration-700 z-0" />
-                            <!-- Первое фото (Интерфейс) - на переднем плане, исчезает при наведении -->
-                            <img src="https://i.yapx.ru/dUEwT.png" alt="TimeFlow UI" class="absolute inset-0 w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 opacity-100 group-hover:opacity-0 transition-all duration-700 z-10" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/20 to-transparent pointer-events-none z-20"></div>
-                        </div>
-                        <div class="p-8 md:p-12 flex flex-col justify-start bg-[#111] relative z-30 overflow-y-auto hide-scrollbar" style="max-height: 450px;">
-                            <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-transparent via-[#222] to-transparent hidden md:block"></div>
-                            <div class="flex flex-wrap gap-2 mb-4 shrink-0">
-                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">React</span>
-                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">Google Cloud API</span>
-                                <span class="px-3 py-1 rounded-full border border-[#333] text-xs font-mono text-gray-400 bg-[#0D0D0D]">Analytics</span>
-                            </div>
-                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-3 leading-tight shrink-0">TimeFlow Cyber Edition</h3>
-                            <p class="text-gray-400 leading-relaxed mb-4 text-sm shrink-0">
-                                Интеллектуальный тайм-трекер в стиле «кибер-реализм» для глубокого анализа продуктивности. Приложение не просто замеряет время, а превращает его в структурированные данные, автоматически синхронизированные с облачной экосистемой Google.
-                            </p>
-                            
-                            <!-- Выпадающий блок "Подробнее" -->
-                            <details class="group cursor-pointer shrink-0 mb-6">
-                                <summary class="inline-flex items-center gap-2 text-[#B026FF] font-bold hover:text-white transition-colors outline-none select-none">
-                                    Подробнее о проекте <i data-lucide="chevron-down" class="group-open:rotate-180 transition-transform w-5 h-5"></i>
-                                </summary>
-                                <div class="text-gray-300 text-sm space-y-4 mt-4 pb-2 border-t border-[#222] pt-4 cursor-default">
-                                    <div>
-                                        <h4 class="text-white font-bold mb-2">🛠 Стек технологий:</h4>
-                                        <p class="text-gray-400">React, Tailwind CSS, Google Cloud API (Calendar & Tasks), Lucide Icons.</p>
-                                    </div>
-                                    <div>
-                                        <h4 class="text-cyan-400 font-bold mb-2">🎯 Ключевой функционал:</h4>
-                                        <ul class="space-y-2 text-gray-400">
-                                            <li class="flex items-start gap-2"><span class="text-cyan-400 shrink-0">▹</span> <span><b class="text-gray-300">Двусторонняя синхронизация:</b> Завершенные сессии улетают в Google Calendar, а задачи импортируются из Google Tasks одним нажатием.</span></li>
-                                            <li class="flex items-start gap-2"><span class="text-cyan-400 shrink-0">▹</span> <span><b class="text-gray-300">Глубокая аналитика:</b> Мониторинг плана (160 часов), динамический годовой график и детализация по проектам (ядрам).</span></li>
-                                            <li class="flex items-start gap-2"><span class="text-cyan-400 shrink-0">▹</span> <span><b class="text-gray-300">Управление данными:</b> Ручная корректировка, динамическое создание категорий и продвинутый CSV-импорт (Toggl Track).</span></li>
-                                            <li class="flex items-start gap-2"><span class="text-cyan-400 shrink-0">▹</span> <span><b class="text-gray-300">Cyberpunk UI/UX:</b> Адаптивный неоновый интерфейс с «мини-режимом» для фокусировки и поддержкой горячих клавиш.</span></li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <h4 class="text-[#39FF14] font-bold mb-2">🏆 Мои достижения в проекте:</h4>
-                                        <ul class="space-y-2 text-gray-400">
-                                            <li class="flex items-start gap-2"><span class="text-[#39FF14] shrink-0">▹</span> <span><b class="text-gray-300">Сложные интеграции:</b> Успешно реализована авторизация OAuth2 и работа с Google Calendar API v3 / Tasks API.</span></li>
-                                            <li class="flex items-start gap-2"><span class="text-[#39FF14] shrink-0">▹</span> <span><b class="text-gray-300">Data Parsing:</b> Написан мощный алгоритм для преобразования сырых отчетов CSV в структурированную базу логов.</span></li>
-                                            <li class="flex items-start gap-2"><span class="text-[#39FF14] shrink-0">▹</span> <span><b class="text-gray-300">Архитектура состояния:</b> Приложение мгновенно пересчитывает статистику за весь год при переключении фильтров, обрабатывая огромный массив данных без зависаний.</span></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </details>
-
-                            <a href="#contact" class="inline-flex items-center gap-2 text-white font-bold hover:text-[#B026FF] transition-colors w-max group/btn mt-auto shrink-0">
-                                Заказать похожий <i data-lucide="chevron-right" class="group-hover/btn:translate-x-1 transition-transform w-5 h-5"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            
-            <!-- Индикаторы слайдов (Dots) -->
-            <div id="sliderDots" class="flex justify-center gap-3 mt-8">
+    <section class="section light" aria-labelledby="formats-title">
+      <div class="shell">
+        <p class="section-label" data-reveal>Что можно внедрить</p>
+        <h2 class="section-title" id="formats-title" data-reveal>Формат определяется задачей, а не технологией</h2>
+        <div class="service-grid">
+          <article class="service" data-reveal>
+            <i class="service-icon" data-lucide="sheet"></i>
+            <h3>Рабочие инструменты</h3>
+            <p>Калькуляторы, модели, автоматизация Google Sheets и Apps Script для конкретного процесса.</p>
+          </article>
+          <article class="service" data-reveal>
+            <i class="service-icon" data-lucide="panels-top-left"></i>
+            <h3>Внутренние веб-продукты</h3>
+            <p>CRM, системы учёта, формы для сотрудников, личные кабинеты, роли пользователей и отчёты.</p>
+          </article>
+          <article class="service" data-reveal>
+            <i class="service-icon" data-lucide="network"></i>
+            <h3>Интеграции и данные</h3>
+            <p>Обмен данными между сервисами, уведомления, дашборды и интеграции с 1С.</p>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <!-- Блок 4: Кейсы -->
-    <section id="cases" class="py-24 bg-[#0D0D0D] border-t border-[#1A1A1A]">
-        <div class="container mx-auto px-6 max-w-6xl">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-16">
-                Избранные <span class="text-[#39FF14]">Кейсы</span>
-            </h2>
-            
-            <div class="space-y-8">
-                <!-- Кейс 1 -->
-                <div class="bg-[#111] border border-[#222] rounded-2xl overflow-hidden grid md:grid-cols-12 gap-0">
-                    <div class="md:col-span-5 bg-[#1A1A1A] p-8 flex items-center justify-center border-b md:border-b-0 md:border-r border-[#222]">
-                        <div class="text-center space-y-4">
-                            <i data-lucide="bot" class="text-[#39FF14] w-12 h-12 mx-auto"></i>
-                            <h3 class="text-white font-bold text-xl">Система учета финансов</h3>
-                            <p class="text-xs font-mono text-gray-500">ТГ-бот + Google Sheets</p>
-                        </div>
-                    </div>
-                    <div class="md:col-span-7 p-8 md:p-10 space-y-6">
-                        <div>
-                            <h4 class="text-gray-500 text-sm uppercase tracking-wider mb-2 font-semibold">Задача</h4>
-                            <p class="text-gray-300 text-sm">Избавить клиента от ручного ведения расходов в блокнотах и неудобных приложениях.</p>
-                        </div>
-                        <div>
-                            <h4 class="text-gray-500 text-sm uppercase tracking-wider mb-2 font-semibold">Решение</h4>
-                            <p class="text-gray-300 text-sm">Разработан ТГ-бот, который парсит текстовые сообщения с тратами и мгновенно раскидывает их по категориям в защищенной Google Таблице с авто-дашбордом.</p>
-                        </div>
-                        <div class="pt-4 border-t border-[#222]">
-                            <h4 class="text-sm uppercase tracking-wider mb-2 font-semibold text-[#39FF14]">Результат</h4>
-                            <p class="text-white">Время на отчетность сократилось с 1 часа в неделю до 2 минут в день. Данные всегда под рукой.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Кейс 2 -->
-                <div class="bg-[#111] border border-[#222] rounded-2xl overflow-hidden grid md:grid-cols-12 gap-0">
-                    <div class="md:col-span-5 bg-[#1A1A1A] p-8 flex items-center justify-center border-b md:border-b-0 md:border-r border-[#222]">
-                        <div class="text-center space-y-4">
-                            <i data-lucide="layout" class="text-[#B026FF] w-12 h-12 mx-auto"></i>
-                            <h3 class="text-white font-bold text-xl">Cyber/Neon UI Kit</h3>
-                            <p class="text-xs font-mono text-gray-500">Figma + Tilda Zero Block</p>
-                        </div>
-                    </div>
-                    <div class="md:col-span-7 p-8 md:p-10 space-y-6">
-                        <div>
-                            <h4 class="text-gray-500 text-sm uppercase tracking-wider mb-2 font-semibold">Задача</h4>
-                            <p class="text-gray-300 text-sm">Создать единую дизайн-систему для технологичного стартапа, чтобы ускорить сборку новых лендингов.</p>
-                        </div>
-                        <div>
-                            <h4 class="text-gray-500 text-sm uppercase tracking-wider mb-2 font-semibold">Решение</h4>
-                            <p class="text-gray-300 text-sm">Отрисован UI Kit в темной теме с неоновыми акцентами: кнопки, формы, карточки, типографика. Все элементы перенесены в библиотеку Tilda.</p>
-                        </div>
-                        <div class="pt-4 border-t border-[#222]">
-                            <h4 class="text-sm uppercase tracking-wider mb-2 font-semibold text-[#B026FF]">Результат</h4>
-                            <p class="text-white">Сборка новых страниц стала занимать в 2 раза меньше времени, дизайн стал консистентным.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <section class="section soft" id="process">
+      <div class="shell">
+        <p class="section-label" data-reveal>Как строится работа</p>
+        <h2 class="section-title" data-reveal>Сначала процесс и данные. Затем интерфейс.</h2>
+        <div class="process">
+          <p class="process-note" data-reveal>До разработки фиксируем задачу, пользователей, источники данных и критерии готовности. Так решение остаётся понятным и проверяемым.</p>
+          <div class="steps">
+            <article class="step" data-reveal>
+              <span>01</span>
+              <div><h3>Разбор задачи</h3><p>Что происходит сейчас, где возникает ручная работа и какой результат нужен.</p></div>
+            </article>
+            <article class="step" data-reveal>
+              <span>02</span>
+              <div><h3>Структура решения</h3><p>Состав данных, роли, экраны, расчёты и связи с другими системами.</p></div>
+            </article>
+            <article class="step" data-reveal>
+              <span>03</span>
+              <div><h3>Прототип и разработка</h3><p>Рабочая версия, проверка логики и последовательное добавление функций.</p></div>
+            </article>
+            <article class="step" data-reveal>
+              <span>04</span>
+              <div><h3>Запуск и поддержка</h3><p>Передача решения, инструкции и согласованные изменения после начала работы.</p></div>
+            </article>
+          </div>
         </div>
+      </div>
     </section>
 
-    <!-- Блок 5: Контакты и Форма -->
-    <section id="contact" class="py-24 relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-96 h-96 bg-[#39FF14]/5 rounded-full blur-[100px] pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#B026FF]/5 rounded-full blur-[100px] pointer-events-none"></div>
-        
-        <div class="container mx-auto px-6 max-w-6xl relative z-10 grid md:grid-cols-2 gap-16">
-            <div>
-                <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">
-                    Готовы начать <span class="text-[#39FF14]">работу?</span>
-                </h2>
-                <p class="text-gray-400 mb-10 text-lg">
-                    Опишите вашу задачу. Я свяжусь с вами в Telegram для обсуждения деталей и оценки проекта.
-                </p>
-                
-                <div class="space-y-6">
-                    <a href="https://t.me/Ekater5rina" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 text-gray-300 hover:text-[#39FF14] transition-colors group">
-                        <div class="w-12 h-12 rounded-full bg-[#1A1A1A] flex items-center justify-center group-hover:bg-[#39FF14]/20 transition-colors">
-                            <i data-lucide="send" class="w-5 h-5"></i>
-                        </div>
-                        <div>
-                            <p class="font-bold text-white group-hover:text-[#39FF14] transition-colors">Telegram</p>
-                            <p class="text-sm">@Ekater5rina</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Форма -->
-            <div class="bg-[#111] p-8 md:p-10 rounded-2xl border border-[#222] shadow-2xl relative overflow-hidden">
-                
-                <div id="successMessage" class="absolute inset-0 bg-[#111] flex-col items-center justify-center text-center p-8 z-20 hidden">
-                    <i data-lucide="check-circle-2" class="text-[#39FF14] w-16 h-16 mb-6"></i>
-                    <h3 class="text-2xl font-bold text-white mb-2">Заявка отправлена!</h3>
-                    <p class="text-gray-400">Я скоро свяжусь с вами.</p>
-                </div>
-
-                <h3 class="text-2xl font-bold text-white mb-8">Оставить заявку</h3>
-                <form id="contactForm" class="space-y-6 relative z-10">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-400 mb-2" for="username">Ваше имя / Ник в ТГ</label>
-                        <input type="text" id="username" required placeholder="@username" class="w-full bg-[#1A1A1A] border border-[#333] rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#39FF14] transition-colors placeholder-gray-600">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-400 mb-2" for="task">Краткое описание задачи</label>
-                        <textarea id="task" required rows="4" placeholder="Нужен сайт на Tilda и бот..." class="w-full bg-[#1A1A1A] border border-[#333] rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#39FF14] transition-colors resize-none placeholder-gray-600"></textarea>
-                    </div>
-                    <button type="submit" id="submitBtn" class="w-full py-4 rounded-lg flex justify-center items-center gap-2 bg-[#39FF14] text-black font-bold hover:shadow-[0_0_25px_rgba(57,255,20,0.6)] transition-all duration-300">
-                        <span id="btnText">Отправить задачу</span>
-                        <i data-lucide="chevron-right" id="btnIcon" class="w-5 h-5"></i>
-                    </button>
-                </form>
-            </div>
+    <section class="contact" id="contact">
+      <div class="shell contact-grid">
+        <div data-reveal>
+          <p class="section-label">Обсудить проект</p>
+          <h2>Покажите, как устроен ваш учёт сейчас</h2>
+          <p>В сообщении можно описать задачу своими словами и приложить таблицу или скриншот. Я задам уточняющие вопросы и предложу возможный формат решения.</p>
         </div>
+        <a class="button" href="https://t.me/Ekater5rina" target="_blank" rel="noopener noreferrer" data-reveal>
+          <i data-lucide="send"></i>
+          Написать в Telegram
+        </a>
+      </div>
     </section>
+  </main>
 
-    <footer class="border-t border-[#1A1A1A] py-8 text-center text-sm text-gray-500">
-        <div class="container mx-auto px-6">
-            <p>© 2024 Digital Integrator.</p>
-        </div>
-    </footer>
+  <footer class="footer">
+    <div class="shell footer-row">
+      <span>© 2026 Екатерина Колесникова</span>
+      <a href="https://t.me/Ekater5rina" target="_blank" rel="noopener noreferrer">Telegram: @Ekater5rina</a>
+    </div>
+  </footer>
 
-    <script>
-        lucide.createIcons();
+  <script>
+    const header = document.getElementById('siteHeader');
+    const menuButton = document.getElementById('menuButton');
+    const navLinks = document.getElementById('navLinks');
 
-        // 1. Анимация шапки при скролле
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('bg-[#0D0D0D]/90', 'backdrop-blur-md', 'border-[#1A1A1A]', 'py-4');
-                navbar.classList.remove('bg-transparent', 'border-transparent', 'py-6');
-            } else {
-                navbar.classList.remove('bg-[#0D0D0D]/90', 'backdrop-blur-md', 'border-[#1A1A1A]', 'py-4');
-                navbar.classList.add('bg-transparent', 'border-transparent', 'py-6');
-            }
-        });
+    const refreshHeader = () => header.classList.toggle('is-scrolled', window.scrollY > 24);
+    refreshHeader();
+    window.addEventListener('scroll', refreshHeader, { passive: true });
 
-        // 2. Мобильное бургер-меню
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const menuIcon = document.getElementById('menuIcon');
-        let isMenuOpen = false;
+    menuButton.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('is-open');
+      menuButton.setAttribute('aria-expanded', String(isOpen));
+      menuButton.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню');
+      menuButton.innerHTML = `<i data-lucide="${isOpen ? 'x' : 'menu'}"></i>`;
+      if (window.lucide) window.lucide.createIcons();
+    });
 
-        function toggleMenu() {
-            isMenuOpen = !isMenuOpen;
-            if (isMenuOpen) {
-                mobileMenu.classList.remove('max-h-0', 'py-0', 'opacity-0');
-                mobileMenu.classList.add('max-h-96', 'py-6', 'opacity-100');
-                menuIcon.setAttribute('data-lucide', 'x');
-            } else {
-                mobileMenu.classList.add('max-h-0', 'py-0', 'opacity-0');
-                mobileMenu.classList.remove('max-h-96', 'py-6', 'opacity-100');
-                menuIcon.setAttribute('data-lucide', 'menu');
-            }
-            lucide.createIcons();
+    navLinks.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('is-open');
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.setAttribute('aria-label', 'Открыть меню');
+        menuButton.innerHTML = '<i data-lucide="menu"></i>';
+        if (window.lucide) window.lucide.createIcons();
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
         }
+      });
+    }, { threshold: 0.12 });
 
-        mobileMenuBtn.addEventListener('click', toggleMenu);
-        document.querySelectorAll('.mobile-link').forEach(link => {
-            link.addEventListener('click', () => {
-                if(isMenuOpen) toggleMenu();
-            });
-        });
+    document.querySelectorAll('[data-reveal]').forEach((element, index) => {
+      element.style.transitionDelay = `${Math.min(index % 4, 3) * 70}ms`;
+      observer.observe(element);
+    });
 
-        // 3. Логика карусели / слайдера
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slider-item');
-        const totalSlides = slides.length;
-        const track = document.getElementById('sliderTrack');
-        const dotsContainer = document.getElementById('sliderDots');
-
-        for (let i = 0; i < totalSlides; i++) {
-            const dot = document.createElement('button');
-            dot.className = `h-2 rounded-full transition-all duration-300 ${i === 0 ? 'bg-gradient-to-r from-[#39FF14] to-[#B026FF] w-12' : 'bg-[#333] w-2 hover:bg-[#555]'}`;
-            dot.setAttribute('aria-label', `Slide ${i+1}`);
-            dot.addEventListener('click', () => goToSlide(i));
-            dotsContainer.appendChild(dot);
-        }
-        const dots = dotsContainer.childNodes;
-
-        function updateSlider() {
-            track.style.transform = `translateX(-${currentSlide * 100}%)`;
-            dots.forEach((dot, index) => {
-                if (index === currentSlide) {
-                    dot.className = 'h-2 rounded-full transition-all duration-300 bg-gradient-to-r from-[#39FF14] to-[#B026FF] w-12';
-                } else {
-                    dot.className = 'h-2 rounded-full transition-all duration-300 bg-[#333] w-2 hover:bg-[#555]';
-                }
-            });
-        }
-
-        function nextSlide() {
-            currentSlide = (currentSlide === totalSlides - 1) ? 0 : currentSlide + 1;
-            updateSlider();
-        }
-
-        function prevSlide() {
-            currentSlide = (currentSlide === 0) ? totalSlides - 1 : currentSlide - 1;
-            updateSlider();
-        }
-
-        function goToSlide(index) {
-            currentSlide = index;
-            updateSlider();
-        }
-
-        document.getElementById('nextBtn').addEventListener('click', nextSlide);
-        document.getElementById('prevBtn').addEventListener('click', prevSlide);
-
-        // Свайпы для мобилок
-        let touchStartX = 0;
-        let touchEndX = 0;
-        const sliderContainer = document.getElementById('sliderContainer');
-
-        sliderContainer.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, {passive: true});
-
-        sliderContainer.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        }, {passive: true});
-
-        function handleSwipe() {
-            const swipeDistance = touchStartX - touchEndX;
-            if (swipeDistance > 50) nextSlide();
-            if (swipeDistance < -50) prevSlide();
-        }
-
-        // 4. Обработка формы
-        const form = document.getElementById('contactForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const btnText = document.getElementById('btnText');
-        const btnIcon = document.getElementById('btnIcon');
-        const successMessage = document.getElementById('successMessage');
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            submitBtn.style.opacity = '0.7';
-            submitBtn.style.cursor = 'wait';
-            btnText.innerText = 'Отправка...';
-            btnIcon.style.display = 'none';
-
-            setTimeout(() => {
-                form.reset();
-                successMessage.classList.remove('hidden');
-                successMessage.classList.add('flex');
-                
-                submitBtn.style.opacity = '1';
-                submitBtn.style.cursor = 'pointer';
-                btnText.innerText = 'Отправить задачу';
-                btnIcon.style.display = 'block';
-
-                setTimeout(() => {
-                    successMessage.classList.add('hidden');
-                    successMessage.classList.remove('flex');
-                }, 5000);
-
-            }, 1500);
-        });
-    </script>
+    window.addEventListener('load', () => {
+      if (window.lucide) window.lucide.createIcons();
+    });
+  </script>
 </body>
 </html>
