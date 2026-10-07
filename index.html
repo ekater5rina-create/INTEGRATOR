@@ -8,16 +8,33 @@
   <meta name="author" content="Екатерина Колесникова">
   <meta name="theme-color" content="#0b0d0c">
   <link rel="canonical" href="https://ekater5rina-create.github.io/INTEGRATOR/">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23b7ff3c'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='26' font-weight='800' text-anchor='middle' fill='%23101609'%3EEK%3C/text%3E%3C/svg%3E">
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ru_RU">
   <meta property="og:title" content="Внедрение веб-продуктов для бизнеса | Екатерина Колесникова">
   <meta property="og:description" content="Изучаю процессы и существующие инструменты, затем проектирую и внедряю подходящее веб-решение.">
   <meta property="og:url" content="https://ekater5rina-create.github.io/INTEGRATOR/">
-  <meta property="og:image" content="https://ekater5rina-create.github.io/INTEGRATOR/assets/time-tracking.png">
+  <meta property="og:image" content="https://ekater5rina-create.github.io/INTEGRATOR/og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Интерфейс внутреннего веб-продукта">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Внедрение веб-продуктов для бизнеса | Екатерина Колесникова">
+  <meta name="twitter:description" content="Изучаю процессы и существующие инструменты, затем проектирую и внедряю подходящее веб-решение.">
+  <meta name="twitter:image" content="https://ekater5rina-create.github.io/INTEGRATOR/og-cover.png">
 
-  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Екатерина Колесникова",
+    "url": "https://ekater5rina-create.github.io/INTEGRATOR/",
+    "jobTitle": "Проектирование и внедрение веб-продуктов для бизнеса",
+    "sameAs": ["https://t.me/Ekater5rina"]
+  }
+  </script>
+
   <style>
     :root {
       --ink: #0b0d0c;
@@ -157,7 +174,7 @@
       align-items: flex-end;
       overflow: hidden;
       background-color: #111;
-      background-image: url("assets/time-tracking.png");
+      background-image: url("work-time.png");
       background-position: center;
       background-size: cover;
     }
@@ -310,7 +327,8 @@
       padding: 34px 34px 40px 0;
     }
     .service + .service { padding-left: 34px; border-left: 1px solid #cdd2ca; }
-    .service-icon { width: 28px; height: 28px; color: #394238; }
+    .service-icon { display: inline-block; width: 28px; height: 28px; color: #394238; }
+    .service-icon svg { display: block; width: 100%; height: 100%; }
     .service h3 { margin: 46px 0 14px; font-size: 24px; line-height: 1.2; }
     .service p { margin: 0; color: #566056; }
 
@@ -408,7 +426,7 @@
       </a>
 
       <button class="icon-button" id="menuButton" type="button" aria-label="Открыть меню" aria-expanded="false">
-        <i data-lucide="menu"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
       </button>
 
       <nav class="nav-links" id="navLinks" aria-label="Основная навигация">
@@ -416,7 +434,7 @@
         <a href="#work">Работы</a>
         <a href="#process">Как работаю</a>
         <a class="button" href="https://t.me/Ekater5rina" target="_blank" rel="noopener noreferrer">
-          <i data-lucide="message-circle"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
           Обсудить задачу
         </a>
       </nav>
@@ -425,7 +443,7 @@
 
   <main id="main">
     <section class="hero" id="top" aria-labelledby="hero-title">
-      <img class="hero-portrait" src="https://i.yapx.ru/dO7L5.jpg" alt="Екатерина Колесникова" width="1280" height="1600">
+      <img class="hero-portrait" src="hero-portrait.png" alt="Екатерина Колесникова" width="1280" height="1600">
       <div class="hero-inner">
         <p class="eyebrow" data-reveal>Екатерина Колесникова</p>
         <p class="hero-name" data-reveal>Изучить.<br>Спроектировать.<br>Внедрить.</p>
@@ -433,11 +451,11 @@
         <p class="hero-copy" data-reveal>Изучаю, как сейчас устроена работа заказчика, какие данные и инструменты уже используются, а затем проектирую и внедряю подходящее веб-решение.</p>
         <div class="hero-actions" data-reveal>
           <a class="button" href="https://t.me/Ekater5rina" target="_blank" rel="noopener noreferrer">
-            <i data-lucide="message-circle"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
             Обсудить задачу
           </a>
           <a class="button secondary" href="#work">
-            <i data-lucide="arrow-down"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
             Посмотреть работы
           </a>
         </div>
@@ -484,7 +502,7 @@
         <div class="work-list">
           <article class="work-item work-dashboard" data-reveal>
             <div class="work-media">
-              <img src="assets/financial-dashboard.png" alt="Финансовый и производственный дашборд" loading="lazy" width="1903" height="983">
+              <img src="work-dashboard.png" alt="Финансовый и производственный дашборд" loading="lazy" width="1903" height="983">
             </div>
             <div class="work-copy">
               <p class="work-kicker">Финансы и производство</p>
@@ -500,7 +518,7 @@
 
           <article class="work-item work-cash" data-reveal>
             <div class="work-media">
-              <img src="assets/cash-accounting.png" alt="Веб-приложение для учета наличных операций" loading="lazy" width="1543" height="929">
+              <img src="work-cash.png" alt="Веб-приложение для учета наличных операций" loading="lazy" width="1543" height="929">
             </div>
             <div class="work-copy">
               <p class="work-kicker">Внутреннее веб-приложение</p>
@@ -516,7 +534,7 @@
 
           <article class="work-item work-time" data-reveal>
             <div class="work-media">
-              <img src="assets/time-tracking.png" alt="Приложение для учета рабочего времени и задач" loading="lazy" width="1517" height="1036">
+              <img src="work-time.png" alt="Приложение для учета рабочего времени и задач" loading="lazy" width="1517" height="1036">
             </div>
             <div class="work-copy">
               <p class="work-kicker">Команда и проекты</p>
@@ -539,17 +557,23 @@
         <h2 class="section-title" id="formats-title" data-reveal>Формат определяется задачей, а не технологией</h2>
         <div class="service-grid">
           <article class="service" data-reveal>
-            <i class="service-icon" data-lucide="sheet"></i>
+            <span class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/><path d="M15 3v18"/></svg>
+            </span>
             <h3>Рабочие инструменты</h3>
             <p>Калькуляторы, модели, автоматизация Google Sheets и Apps Script для конкретного процесса.</p>
           </article>
           <article class="service" data-reveal>
-            <i class="service-icon" data-lucide="panels-top-left"></i>
+            <span class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+            </span>
             <h3>Внутренние веб-продукты</h3>
             <p>CRM, системы учёта, формы для сотрудников, личные кабинеты, роли пользователей и отчёты.</p>
           </article>
           <article class="service" data-reveal>
-            <i class="service-icon" data-lucide="network"></i>
+            <span class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></svg>
+            </span>
             <h3>Интеграции и данные</h3>
             <p>Обмен данными между сервисами, уведомления, дашборды и интеграции с 1С.</p>
           </article>
@@ -593,7 +617,7 @@
           <p>В сообщении можно описать задачу своими словами и приложить таблицу или скриншот. Я задам уточняющие вопросы и предложу возможный формат решения.</p>
         </div>
         <a class="button" href="https://t.me/Ekater5rina" target="_blank" rel="noopener noreferrer" data-reveal>
-          <i data-lucide="send"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
           Написать в Telegram
         </a>
       </div>
@@ -608,6 +632,9 @@
   </footer>
 
   <script>
+    const MENU_ICON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>';
+    const CLOSE_ICON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>';
+
     const header = document.getElementById('siteHeader');
     const menuButton = document.getElementById('menuButton');
     const navLinks = document.getElementById('navLinks');
@@ -620,8 +647,7 @@
       const isOpen = navLinks.classList.toggle('is-open');
       menuButton.setAttribute('aria-expanded', String(isOpen));
       menuButton.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню');
-      menuButton.innerHTML = `<i data-lucide="${isOpen ? 'x' : 'menu'}"></i>`;
-      if (window.lucide) window.lucide.createIcons();
+      menuButton.innerHTML = isOpen ? CLOSE_ICON : MENU_ICON;
     });
 
     navLinks.querySelectorAll('a').forEach((link) => {
@@ -629,8 +655,7 @@
         navLinks.classList.remove('is-open');
         menuButton.setAttribute('aria-expanded', 'false');
         menuButton.setAttribute('aria-label', 'Открыть меню');
-        menuButton.innerHTML = '<i data-lucide="menu"></i>';
-        if (window.lucide) window.lucide.createIcons();
+        menuButton.innerHTML = MENU_ICON;
       });
     });
 
@@ -646,10 +671,6 @@
     document.querySelectorAll('[data-reveal]').forEach((element, index) => {
       element.style.transitionDelay = `${Math.min(index % 4, 3) * 70}ms`;
       observer.observe(element);
-    });
-
-    window.addEventListener('load', () => {
-      if (window.lucide) window.lucide.createIcons();
     });
   </script>
 </body>
