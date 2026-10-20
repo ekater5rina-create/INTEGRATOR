@@ -428,7 +428,7 @@
     .demo-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .demo-fields label { display: grid; gap: 8px; font-size: 14px; font-weight: 650; }
     .demo-fields input { min-width: 0; width: 100%; padding: 12px; border: 1px solid #adb5a9; border-radius: 8px; font: inherit; background: #fff; color: #151815; }
-    .demo-fields input:focus-visible, summary:focus-visible, .report-upload:focus-visible { outline: 3px solid #4a7015; outline-offset: 3px; }
+    .demo-fields input:focus-visible, summary:focus-visible { outline: 3px solid #4a7015; outline-offset: 3px; }
     .demo-note { font-size: 14px; color: #566056; }
     .demo-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; align-items: center; }
     .demo-actions .secondary { color: #151815; background: transparent; border-color: #707a6e; }
@@ -442,9 +442,6 @@
     .demo-formula { border-top: 1px solid #34452d; padding-top: 18px; font-size: 14px; }
     .demo-error { color: #a32a15; min-height: 1.55em; font-size: 14px; }
     .report-box { margin-top: 48px; padding: 32px; background: #fff; border: 1px solid #cdd2ca; border-radius: 16px; }
-    .report-upload { max-width: 100%; font: inherit; font-size: 14px; }
-    .report-upload::file-selector-button { border: 1px solid #a5ad9f; border-radius: 6px; padding: 10px 14px; background: #f2f4ef; cursor: pointer; margin-right: 12px; }
-    .report-links { display: flex; flex-wrap: wrap; gap: 20px; font-size: 14px; margin-top: 20px; }
     .report-results { margin-top: 28px; border-top: 1px solid #cdd2ca; padding-top: 28px; }
     .report-results .demo-kpis dt { color: #566056; }
     .report-scroll { overflow-x: auto; }
@@ -845,13 +842,10 @@
       <div class="shell">
         <p class="section-label">От файлов к готовому отчёту</p>
         <h2 class="section-title" id="report-title">Собрать таблицы. Найти расхождения. Увидеть итог.</h2>
-        <p class="section-intro">Попробуйте объединить два файла с заказами. Пример покажет выручку, затраты, прибыль и отклонение от плана, а также найдёт дубли, ошибки заполнения и убыточные заказы.</p>
+        <p class="section-intro">Посмотрите, как приложение собирает отчёт на готовом примере: рассчитывает выручку, затраты, прибыль и отклонение от плана, находит дубли, ошибки заполнения и убыточные заказы.</p>
         <div class="report-box">
-          <div class="demo-actions"><button class="button" type="button" id="sample-report">Показать на примере</button><label for="report-upload">или выберите свои CSV-файлы</label><input class="report-upload" id="report-upload" type="file" accept=".csv,text/csv" multiple aria-describedby="report-format"></div>
-          <p class="demo-note" id="report-format">До 5 файлов общим размером 2 МБ, до 10 000 записей. CSV в UTF-8; столбцы: Дата; Заказ; Выручка; Затраты; План выручки. Дата: ГГГГ-ММ-ДД, суммы — в рублях, от 0 до 1 000 000 с точностью до копеек. Одна запись на дату и заказ.</p>
-          <p class="demo-note">Файлы обрабатываются в вашем браузере и не отправляются на сервер. В примере все данные вымышлены.</p>
-          <div class="report-links"><a href="#" data-report-download="0">Скачать пример 1 (CSV)</a><a href="#" data-report-download="1">Скачать пример 2 с ошибками (CSV)</a></div>
-          <p id="report-error" class="demo-error" role="alert"></p>
+          <div class="demo-actions"><button class="button" type="button" id="sample-report">Показать на примере</button></div>
+          <p class="demo-note">Готовая демонстрация на вымышленных данных. Ничего загружать не нужно.</p>
           <div class="report-results" id="report-results" hidden>
             <p class="demo-note" id="report-files"></p>
             <p id="report-summary" role="status"></p>

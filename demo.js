@@ -39,10 +39,9 @@
   refreshCalculator();
 
   const samples = [
-    { name: 'demo-orders-1.csv', text: '\uFEFFДата;Заказ;Выручка;Затраты;План выручки\r\n2026-10-01;ДЕМО-101;110000;72000;100000\r\n2026-10-02;ДЕМО-102;85000;61000;90000\r\n' },
-    { name: 'demo-orders-2.csv', text: '\uFEFFДата;Заказ;Выручка;Затраты;План выручки\r\n2026-10-03;ДЕМО-103;40000;47000;50000\r\n2026-10-01;ДЕМО-101;110000;72000;100000\r\n2026-10-04;ДЕМО-104;не указано;20000;30000\r\n' }
+    { name: 'Демонстрационные заказы — часть 1', text: '\uFEFFДата;Заказ;Выручка;Затраты;План выручки\r\n2026-10-01;ДЕМО-101;110000;72000;100000\r\n2026-10-02;ДЕМО-102;85000;61000;90000\r\n' },
+    { name: 'Демонстрационные заказы — часть 2', text: '\uFEFFДата;Заказ;Выручка;Затраты;План выручки\r\n2026-10-03;ДЕМО-103;40000;47000;50000\r\n2026-10-01;ДЕМО-101;110000;72000;100000\r\n2026-10-04;ДЕМО-104;не указано;20000;30000\r\n' }
   ];
-  let uploadVersion = 0;
   function renderReport(files) {
     const result = core.summarize(files);
     const output = document.getElementById('report-results');
@@ -51,7 +50,7 @@
     for (const key of ['revenue', 'cost', 'plan', 'profit']) set('report-' + key, result.accepted.length ? rubles(result[key]) : '—');
     set('report-variance', result.accepted.length ? rubles(result.variance) + ' / ' + percent(result.variancePercent) : '—');
     set('report-files', files.map(file => file.name).join(', '));
-    set('report-summary', result.accepted.length ? `Принято записей: ${result.accepted.length}. Исключено строк или файлов: ${result.errors.length}. Предупреждений: ${result.warnings.length}.` : 'Нет корректных записей. Исправьте ошибки и загрузите файлы повторно.');
+    set('report-summary', result.accepted.length ? `Принято записей: ${result.accepted.length}. Исключено некорректных записей: ${result.errors.length}. Предупреждений: ${result.warnings.length}.` : 'Нет корректных записей для расчёта.');
     const body = document.getElementById('report-body'); body.replaceChildren();
     result.accepted.slice(0, 50).forEach(row => {
       const tr = document.createElement('tr');
@@ -70,31 +69,6 @@
     }
   }
   document.getElementById('sample-report').addEventListener('click', () => {
-    uploadVersion++;
-    document.getElementById('report-upload').value = '';
-    set('report-error', ''); renderReport(samples);
-  });
-  document.getElementById('report-upload').addEventListener('change', async event => {
-    const version = ++uploadVersion;
-    const files = Array.from(event.target.files);
-    document.getElementById('report-results').hidden = true;
-    if (!files.length) { set('report-error', ''); return; }
-    try {
-      if (files.length > 5) throw new Error('Выберите не больше 5 файлов');
-      if (files.some(file => !file.name.toLowerCase().endsWith('.csv'))) throw new Error('В этом демо поддерживается только CSV');
-      if (files.reduce((sum,file) => sum + file.size, 0) > 2 * 1024 * 1024) throw new Error('Общий размер файлов — не больше 2 МБ');
-      set('report-error', 'Читаю файлы…');
-      const decoded = await Promise.all(files.map(async file => ({ name: file.name, text: new TextDecoder('utf-8', { fatal: true }).decode(await file.arrayBuffer()) })));
-      if (version !== uploadVersion) return;
-      renderReport(decoded); set('report-error', '');
-    } catch (error) {
-      if (version !== uploadVersion) return;
-      set('report-error', error instanceof TypeError ? 'Не удалось прочитать текст. Сохраните CSV в кодировке UTF-8.' : error.message);
-    }
-  });
-  document.querySelectorAll('[data-report-download]').forEach(link => {
-    const sample = samples[Number(link.dataset.reportDownload)];
-    link.href = URL.createObjectURL(new Blob([sample.text], { type: 'text/csv;charset=utf-8' }));
-    link.download = sample.name;
+    renderReport(samples);
   });
 })();
