@@ -418,6 +418,67 @@
     .step p { margin: 0; color: var(--muted); }
 
     .contact { padding: 120px 0; color: #111; background: var(--accent); }
+    section[id] { scroll-margin-top: var(--header-height); }
+    .demo-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px; }
+    .demo-panel { padding: 32px; border: 1px solid #cdd2ca; border-radius: 16px; min-width: 0; }
+    .demo-panel h3 { margin: 0 0 24px; font-size: 24px; }
+    .demo-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .demo-fields label { display: grid; gap: 8px; font-size: 14px; font-weight: 650; }
+    .demo-fields input { min-width: 0; width: 100%; padding: 12px; border: 1px solid #adb5a9; border-radius: 8px; font: inherit; background: #fff; color: #151815; }
+    .demo-fields input:focus-visible, summary:focus-visible, .report-upload:focus-visible { outline: 3px solid #4a7015; outline-offset: 3px; }
+    .demo-note { font-size: 14px; color: #566056; }
+    .demo-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; align-items: center; }
+    .demo-actions .secondary { color: #151815; background: transparent; border-color: #707a6e; }
+    .demo-results { background: #10170e; color: #f2f4ef; }
+    .demo-kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 0 0 24px; }
+    .demo-kpis dt { font-size: 13px; color: #b6c0b1; }
+    .demo-kpis dd { margin: 6px 0 0; font-size: clamp(22px, 3vw, 32px); font-weight: 780; overflow-wrap: anywhere; }
+    .demo-kpis dd.accent { color: var(--accent); }
+    [data-state="loss"] #calc-profit { color: #ffb5a5; }
+    .demo-results .demo-note { color: #bac3b5; }
+    .demo-formula { border-top: 1px solid #34452d; padding-top: 18px; font-size: 14px; }
+    .demo-error { color: #a32a15; min-height: 1.55em; font-size: 14px; }
+    .report-box { margin-top: 48px; padding: 32px; background: #fff; border: 1px solid #cdd2ca; border-radius: 16px; }
+    .report-upload { max-width: 100%; font: inherit; font-size: 14px; }
+    .report-upload::file-selector-button { border: 1px solid #a5ad9f; border-radius: 6px; padding: 10px 14px; background: #f2f4ef; cursor: pointer; margin-right: 12px; }
+    .report-links { display: flex; flex-wrap: wrap; gap: 20px; font-size: 14px; margin-top: 20px; }
+    .report-results { margin-top: 28px; border-top: 1px solid #cdd2ca; padding-top: 28px; }
+    .report-results .demo-kpis dt { color: #566056; }
+    .report-scroll { overflow-x: auto; }
+    .report-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .report-table th, .report-table td { padding: 12px; border-bottom: 1px solid #dbe0d6; text-align: right; white-space: nowrap; }
+    .report-table th:first-child, .report-table th:nth-child(2), .report-table td:first-child, .report-table td:nth-child(2) { text-align: left; }
+    .report-issues { padding-left: 20px; font-size: 14px; color: #8a381d; }
+    .integration-map { grid-column: 1 / -1; order: 3; border: 1px solid var(--line); border-radius: 12px; padding: 28px; }
+    .integration-map h4 { margin: 0 0 20px; font-size: 22px; }
+    .integration-nodes { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 18px; align-items: center; }
+    .integration-nodes > div { padding: 16px; background: var(--surface-soft); border-radius: 8px; }
+    .integration-nodes strong { display: block; color: var(--accent); margin-bottom: 8px; }
+    .integration-nodes p, .integration-map > p { font-size: 14px; color: var(--muted); margin: 0; }
+    .integration-map > p { margin-top: 20px; }
+    .starter-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 24px; margin-top: 48px; }
+    .starter-card { border-top: 1px solid #cdd2ca; padding-top: 24px; }
+    .starter-card h3 { font-size: 22px; line-height: 1.2; margin: 0 0 14px; }
+    .starter-card p { color: #566056; }
+    .starter-card a { font-weight: 700; text-underline-offset: 4px; }
+    .faq-list { max-width: 900px; margin-top: 48px; }
+    .faq-list details { border-top: 1px solid var(--line); padding: 22px 0; }
+    .faq-list details:last-child { border-bottom: 1px solid var(--line); }
+    .faq-list summary { cursor: pointer; font-size: 21px; font-weight: 650; }
+    .faq-list p { color: var(--muted); max-width: 760px; }
+    .nav-links a.button { color: var(--accent-ink); }
+    @media (max-width: 820px) {
+      .demo-layout { grid-template-columns: 1fr; }
+      .starter-grid { grid-template-columns: 1fr 1fr; }
+      .integration-nodes { grid-template-columns: 1fr; }
+      .integration-arrow { text-align: center; transform: rotate(90deg); }
+    }
+    @media (max-width: 520px) {
+      .demo-panel, .report-box, .integration-map { padding: 22px; }
+      .demo-fields, .starter-grid { grid-template-columns: 1fr; }
+      .demo-kpis { gap: 18px 12px; }
+      .demo-actions .button { width: 100%; }
+    }
     .contact-grid { display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: end; }
     .contact h2 { max-width: 820px; margin: 0; font-size: clamp(42px, 7vw, 88px); line-height: 0.98; }
     .contact p { max-width: 620px; margin: 24px 0 0; font-size: 18px; }
@@ -511,6 +572,7 @@
       <nav class="nav-links" id="navLinks" aria-label="Основная навигация">
         <a href="#services">Услуги</a>
         <a href="#work">Работы</a>
+        <a href="#demo">Попробовать</a>
         <a href="#process">Как работаю</a>
         <a class="button" href="https://t.me/Ekater5rina" target="_blank" rel="noopener noreferrer">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
@@ -624,9 +686,10 @@
               <p class="work-kicker">Веб-приложение · Telegram-бот · Google Таблица</p>
               <h3>Учёт наличных операций</h3>
               <p>Кто получил деньги, на что потратил и где подтверждающие документы? Приложение собирает операции в одном месте, чтобы не восстанавливать их по сообщениям и разрозненным таблицам.</p>
-              <p>Это связка веб-приложения, чат-бота в Telegram и Google Таблицы. Операции из приложения сохраняются в таблицу и загружаются из неё для просмотра истории. Telegram-бот связан с системой учёта — привычный мессенджер становится частью рабочего процесса.</p>
+              <p>Это связка веб-приложения, чат-бота в Telegram и Google Таблицы. Операции из приложения сохраняются в таблицу и загружаются из неё для просмотра истории. Telegram-бот принимает данные и отправляет уведомления — привычный мессенджер становится частью рабочего процесса.</p>
               <ul class="work-points">
-                <li>Связь с Telegram-ботом и Google Таблицей</li>
+                <li>Ввод данных и уведомления через Telegram-бота</li>
+                <li>Сохранение операций в Google Таблицу</li>
                 <li>Приход и расход с компанией, статьёй и комментарием</li>
                 <li>Раздельный выбор наличных и банковской карты</li>
                 <li>Документы рядом с записью об операции</li>
@@ -634,6 +697,17 @@
                 <li>Расчёт наличных остатков по сотрудникам</li>
               </ul>
               <p>На трёх экранах — вымышленные компании, сотрудники и суммы. Под ваш процесс можно настроить справочники, состав полей и подключение данных.</p>
+            </div>
+            <div class="integration-map">
+              <h4>Данные связаны, работа не обрывается на одном экране</h4>
+              <div class="integration-nodes">
+                <div><strong>Веб-приложение</strong><p>Ввод операций, документы, остатки и история по месяцам.</p></div>
+                <span class="integration-arrow" aria-hidden="true">↔</span>
+                <div><strong>Google Таблица</strong><p>Хранение записей и работа с данными в привычном формате.</p></div>
+                <span class="integration-arrow" aria-hidden="true">↔</span>
+                <div><strong>Telegram-бот</strong><p>Принимает данные и отправляет уведомления.</p></div>
+              </div>
+              <p>Компоненты одной системы учёта: сотруднику удобно вносить данные, а записи доступны для дальнейшей работы. Подобную связку можно разработать под ваш процесс.</p>
             </div>
             <div class="cash-workflow" aria-label="Как работает учёт операций">
               <div>
@@ -679,6 +753,89 @@
               </ul>
             </div>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section light" id="demo" aria-labelledby="demo-title">
+      <div class="shell">
+        <p class="section-label">Попробуйте в деле</p>
+        <h2 class="section-title" id="demo-title">Как меняется прибыль, если материалы дорожают?</h2>
+        <p class="section-intro">Измените параметры заказа — результат пересчитается сразу. Это демонстрация приложения, которое можно адаптировать под ваши материалы, нормы и правила расчёта.</p>
+        <noscript><p>Для интерактивных примеров включите JavaScript в браузере.</p></noscript>
+        <div class="demo-layout">
+          <form class="demo-panel" id="order-demo">
+            <h3>Ваш заказ</h3>
+            <div class="demo-fields">
+              <label>Объём, шт.<input name="quantity" type="number" min="1" max="1000000" step="1" value="100" required></label>
+              <label>Материалы, ₽/шт.<input name="material" type="number" min="0" max="1000000" step="0.01" value="420" required></label>
+              <label>Работы, ₽/шт.<input name="labor" type="number" min="0" max="1000000" step="0.01" value="180" required></label>
+              <label>Накладные на заказ, ₽<input name="overhead" type="number" min="0" max="1000000" step="0.01" value="12000" required></label>
+              <label>Цена продажи, ₽/шт.<input name="price" type="number" min="0" max="1000000" step="0.01" value="1100" required></label>
+            </div>
+            <p class="demo-note">Пример на условных данных. Упрощённая модель без НДС и налогов. Материалы и работы указаны на единицу; накладные — на весь заказ.</p>
+            <div class="demo-actions"><button type="button" class="button" id="material-scenario">Материалы +10%</button><button class="button secondary" type="reset">Сбросить</button></div>
+            <p id="calc-error" class="demo-error" role="alert"></p>
+          </form>
+          <div class="demo-panel demo-results" id="calc-results" aria-live="polite" aria-atomic="true">
+            <h3>Результат по указанным затратам</h3>
+            <dl class="demo-kpis">
+              <div><dt>Выручка</dt><dd id="calc-revenue">—</dd></div>
+              <div><dt>Затраты на заказ</dt><dd id="calc-cost">—</dd></div>
+              <div><dt>Прибыль заказа</dt><dd id="calc-profit" class="accent">—</dd></div>
+              <div><dt>Прибыль / выручка</dt><dd id="calc-margin">—</dd></div>
+            </dl>
+            <p id="calc-status"></p>
+            <p class="demo-note">Затраты на единицу: <strong id="calc-unit">—</strong><br>Цена покрытия затрат: <strong id="calc-break-even">—</strong> / шт. (округлена вверх до копейки).</p>
+            <p class="demo-formula">Затраты = объём × (материалы + работы) + накладные.<br><span id="calc-formula"></span></p>
+          </div>
+        </div>
+        <div class="demo-actions"><a class="button" href="https://t.me/Ekater5rina?text=Здравствуйте!%20Хочу%20обсудить%20калькулятор%20под%20мои%20заказы." target="_blank" rel="noopener noreferrer">Хочу калькулятор под свои заказы</a></div>
+      </div>
+    </section>
+
+    <section class="section light" id="report-demo" aria-labelledby="report-title">
+      <div class="shell">
+        <p class="section-label">От файлов к готовому отчёту</p>
+        <h2 class="section-title" id="report-title">Собрать таблицы. Найти расхождения. Увидеть итог.</h2>
+        <p class="section-intro">Попробуйте объединить два файла с заказами. Пример покажет выручку, затраты, прибыль и отклонение от плана, а также найдёт дубли, ошибки заполнения и убыточные заказы.</p>
+        <div class="report-box">
+          <div class="demo-actions"><button class="button" type="button" id="sample-report">Показать на примере</button><label for="report-upload">или выберите свои CSV-файлы</label><input class="report-upload" id="report-upload" type="file" accept=".csv,text/csv" multiple aria-describedby="report-format"></div>
+          <p class="demo-note" id="report-format">До 5 файлов общим размером 2 МБ, до 10 000 записей. CSV в UTF-8; столбцы: Дата; Заказ; Выручка; Затраты; План выручки. Дата: ГГГГ-ММ-ДД, суммы — в рублях, от 0 до 1 000 000 с точностью до копеек. Одна запись на дату и заказ.</p>
+          <p class="demo-note">Файлы обрабатываются в вашем браузере и не отправляются на сервер. В примере все данные вымышлены.</p>
+          <div class="report-links"><a href="#" data-report-download="0">Скачать пример 1 (CSV)</a><a href="#" data-report-download="1">Скачать пример 2 с ошибками (CSV)</a></div>
+          <p id="report-error" class="demo-error" role="alert"></p>
+          <div class="report-results" id="report-results" hidden>
+            <p class="demo-note" id="report-files"></p>
+            <p id="report-summary" role="status"></p>
+            <dl class="demo-kpis">
+              <div><dt>Принято записей</dt><dd id="report-count">—</dd></div>
+              <div><dt>Выручка</dt><dd id="report-revenue">—</dd></div>
+              <div><dt>Затраты</dt><dd id="report-cost">—</dd></div>
+              <div><dt>Прибыль по указанным затратам</dt><dd id="report-profit">—</dd></div>
+              <div><dt>План выручки</dt><dd id="report-plan">—</dd></div>
+              <div><dt>Отклонение выручки от плана</dt><dd id="report-variance">—</dd></div>
+            </dl>
+            <div class="report-scroll" tabindex="0" role="region" aria-label="Сводная таблица принятых заказов"><table class="report-table"><caption>Принятые записи</caption><thead><tr><th scope="col">Дата</th><th scope="col">Заказ</th><th scope="col">Выручка, ₽</th><th scope="col">Затраты, ₽</th><th scope="col">Прибыль, ₽</th></tr></thead><tbody id="report-body"></tbody></table></div>
+            <p class="demo-note" id="report-truncation"></p>
+            <ul class="report-issues" id="report-issues" aria-label="Ошибки и предупреждения"></ul>
+          </div>
+        </div>
+        <p class="section-intro">В рабочем решении можно настроить обработку ваших Excel-файлов, выгрузок из учётной системы и Google Таблиц. Сначала согласуем структуру данных и контрольные правила.</p>
+        <div class="demo-actions"><a class="button" href="https://t.me/Ekater5rina?text=Здравствуйте!%20Хочу%20автоматизировать%20сборку%20отчёта." target="_blank" rel="noopener noreferrer">Обсудить автоматизацию отчёта</a></div>
+      </div>
+    </section>
+
+    <section class="section light" id="start" aria-labelledby="start-title">
+      <div class="shell">
+        <p class="section-label">Небольшая задача — понятный результат</p>
+        <h2 class="section-title" id="start-title">Можно начать с одной задачи</h2>
+        <p class="section-intro">Необязательно сразу разрабатывать большую систему. Сначала определим, что инструмент должен делать и как проверим результат. Затем создадим рабочую версию.</p>
+        <div class="starter-grid">
+          <article class="starter-card"><h3>Одна таблица</h3><p>Убрать повторный ввод, ручной перенос данных и однотипные расчёты.</p><a href="https://t.me/Ekater5rina?text=Хочу%20автоматизировать%20таблицу." target="_blank" rel="noopener noreferrer">Автоматизировать таблицу →</a></article>
+          <article class="starter-card"><h3>Один калькулятор</h3><p>Рассчитывать заказ по согласованным правилам и видеть результат при изменении параметров.</p><a href="#demo">Попробовать пример →</a></article>
+          <article class="starter-card"><h3>Одна форма</h3><p>Собирать заявки или операции сотрудников с нужными полями и проверкой заполнения.</p><a href="https://t.me/Ekater5rina?text=Хочу%20форму%20для%20сотрудников." target="_blank" rel="noopener noreferrer">Обсудить форму →</a></article>
+          <article class="starter-card"><h3>Одна связка</h3><p>Передавать данные между приложением, таблицей и Telegram, отправлять уведомления о событиях.</p><a href="https://t.me/Ekater5rina?text=Хочу%20связать%20приложение,%20таблицу%20и%20Telegram." target="_blank" rel="noopener noreferrer">Обсудить интеграцию →</a></article>
         </div>
       </div>
     </section>
@@ -741,6 +898,21 @@
       </div>
     </section>
 
+    <section class="section soft" id="faq" aria-labelledby="faq-title">
+      <div class="shell">
+        <p class="section-label">Перед началом работы</p>
+        <h2 class="section-title" id="faq-title">Что обычно спрашивают</h2>
+        <div class="faq-list">
+          <details><summary>Можно ли оставить наши таблицы?</summary><p>Да, если они подходят для задачи. Можно автоматизировать действующую таблицу или связать её с приложением. Если потребуется другое хранение данных, обсудим причины до разработки.</p></details>
+          <details><summary>Можно начать с небольшой задачи?</summary><p>Да. Например, с одного расчёта, отчёта или формы. До начала работы фиксируем состав функций, исходные данные и критерии приёмки.</p></details>
+          <details><summary>Как определяется стоимость?</summary><p>После разбора задачи: учитываются экраны, расчёты, интеграции, роли пользователей и подготовка данных. Объём, стоимость и этапы согласуем до начала разработки. Дополнительные функции оцениваем отдельно.</p></details>
+          <details><summary>Что нужно от меня для начала?</summary><p>Описание задачи и пример того, как вы решаете её сейчас: таблица, форма или скриншот. Для первого обсуждения достаточно обезличенных данных. Вместе определим пользователей, источники данных и нужный результат.</p></details>
+          <details><summary>Кто сможет пользоваться приложением?</summary><p>Состав пользователей и необходимые права определяем под задачу. Например, сотрудники вносят данные, а руководитель просматривает результаты. Авторизацию и ограничения доступа включаем в согласованный объём разработки.</p></details>
+          <details><summary>Что происходит после запуска?</summary><p>Проверяем согласованные сценарии и передаём инструкции. Условия поддержки, исправлений и дальнейшего развития обсуждаем до запуска и фиксируем в договорённостях.</p></details>
+        </div>
+      </div>
+    </section>
+
     <section class="contact" id="contact">
       <div class="shell contact-grid">
         <div data-reveal>
@@ -763,6 +935,8 @@
     </div>
   </footer>
 
+  <script src="demo-core.js" defer></script>
+  <script src="demo.js" defer></script>
   <script>
     const MENU_ICON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>';
     const CLOSE_ICON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>';
