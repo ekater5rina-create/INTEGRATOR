@@ -361,6 +361,9 @@
     }
     .work-cash .work-media { aspect-ratio: 1264 / 983; }
     .work-cash .work-media img { object-fit: contain; }
+    .work-dashboard .work-media { aspect-ratio: 1586 / 992; }
+    .work-dashboard .work-media img { object-fit: contain; }
+    .carousel-track > a { display: block; flex: 0 0 100%; width: 100%; height: 100%; }
     .carousel-caption {
       position: absolute;
       bottom: 32px;
@@ -647,8 +650,30 @@
 
         <div class="work-list">
           <article class="work-item work-dashboard" id="dashboard-case" data-reveal>
-            <div class="work-media">
-              <img src="work-dashboard.png" alt="Финансовый и производственный дашборд" loading="lazy" width="1903" height="983">
+            <div class="work-media carousel" role="region" aria-label="Примеры финансового, денежного и производственного дашбордов">
+              <div class="carousel-track">
+                <a href="dashboard-finance.png" target="_blank" rel="noopener noreferrer" data-caption="1 / 4 · Финансы бизнеса · Концепт" aria-label="Открыть финансовый дашборд в полном размере">
+                  <img src="dashboard-finance.png" alt="Концепт: выручка 48 млн рублей, валовая прибыль 14,4 млн, EBITDA 7,2 млн, чистая прибыль 4,8 млн. План-факт, динамика и ИИ-комментарий. Все данные вымышлены." loading="lazy" width="1586" height="992">
+                </a>
+                <a href="dashboard-cashflow.png" target="_blank" rel="noopener noreferrer" data-caption="2 / 4 · Денежный поток · Концепт" aria-label="Открыть дашборд денежных потоков в полном размере">
+                  <img src="dashboard-cashflow.png" alt="Концепт денежных потоков: остаток на конец месяца 6 млн рублей, минимальный остаток 3 млн при лимите 4 млн. Прогноз и предупреждение о дефиците относительно лимита. Все данные вымышлены." loading="lazy" width="1586" height="992">
+                </a>
+                <a href="dashboard-production.png" target="_blank" rel="noopener noreferrer" data-caption="3 / 4 · Производство и заказы · Концепт" aria-label="Открыть производственный дашборд в полном размере">
+                  <img src="dashboard-production.png" alt="Концепт производства: годный выпуск 9 600 штук, выполнение плана 96%, загрузка мощностей 80%, брак 400 штук. Сравнение линий и статусы заказов. Все данные вымышлены." loading="lazy" width="1586" height="992">
+                </a>
+                <a href="work-dashboard.png" target="_blank" rel="noopener noreferrer" data-caption="4 / 4 · Исходный пример дашборда" aria-label="Открыть исходный пример дашборда в полном размере">
+                  <img src="work-dashboard.png" alt="Исходный пример финансового и производственного дашборда" loading="lazy" width="1903" height="983">
+                </a>
+              </div>
+              <button class="carousel-btn prev" type="button" aria-label="Предыдущий дашборд"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+              <button class="carousel-btn next" type="button" aria-label="Следующий дашборд"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+              <p class="carousel-caption" aria-live="polite">1 / 4 · Финансы бизнеса · Концепт</p>
+              <div class="carousel-dots">
+                <button class="carousel-dot is-active" type="button" aria-label="Финансовый дашборд" aria-pressed="true"></button>
+                <button class="carousel-dot" type="button" aria-label="Дашборд денежных потоков" aria-pressed="false"></button>
+                <button class="carousel-dot" type="button" aria-label="Производственный дашборд" aria-pressed="false"></button>
+                <button class="carousel-dot" type="button" aria-label="Исходный пример дашборда" aria-pressed="false"></button>
+              </div>
             </div>
             <div class="work-copy">
               <p class="work-kicker">Данные из разных систем · Аналитика · ИИ</p>
@@ -662,7 +687,7 @@
                 <li>ИИ-аналитика: вопросы к данным обычным языком и пояснения отклонений</li>
                 <li>ИИ-сводки и гипотезы причин изменений для дальнейшей проверки</li>
               </ul>
-              <p>На изображении — пример финансового и производственного дашборда. Источники данных, показатели и функции ИИ подберём под вашу задачу.</p>
+              <p>В галерее — три концепта на вымышленных данных и исходный пример дашборда. Переключайте изображения и нажмите на любое, чтобы рассмотреть в полном размере. Источники данных, показатели и функции ИИ подберём под вашу задачу.</p>
               <div class="demo-actions"><a class="button" href="https://t.me/Ekater5rina?text=Здравствуйте!%20Хочу%20обсудить%20дашборд%20по%20данным%20моих%20систем%20с%20аналитикой%20и%20ИИ." target="_blank" rel="noopener noreferrer">Обсудить мой дашборд</a></div>
             </div>
           </article>
