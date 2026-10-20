@@ -469,6 +469,23 @@
     .faq-list details:last-child { border-bottom: 1px solid var(--line); }
     .faq-list summary { cursor: pointer; font-size: 21px; font-weight: 650; }
     .faq-list p { color: var(--muted); max-width: 760px; }
+    .picker { margin-top: 44px; padding: 32px; border: 1px solid #cdd2ca; border-radius: 16px; background: #fff; max-width: 960px; scroll-margin-top: calc(var(--header-height) + 24px); }
+    .picker progress { width: 100%; height: 8px; accent-color: #608d22; margin: 8px 0 28px; }
+    .picker fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+    .picker legend { font-weight: 750; font-size: clamp(23px, 3vw, 32px); margin-bottom: 24px; }
+    .picker-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .picker-option { display: flex; gap: 12px; align-items: center; padding: 16px; border: 1px solid #cdd2ca; border-radius: 10px; cursor: pointer; }
+    .picker-option:has(input:checked) { background: #eef8dc; border-color: #608d22; }
+    .picker-option:focus-within { outline: 3px solid #608d22; outline-offset: 2px; }
+    .picker-option input { accent-color: #4c7415; width: 18px; height: 18px; flex-shrink: 0; }
+    .picker-step { margin: 0; color: #566056; font-size: 14px; }
+    .picker [hidden] { display: none; }
+    .picker-result h3 { font-size: 30px; margin: 0 0 20px; }
+    .picker-result p { max-width: 720px; }
+    .picker-result label { display: block; font-weight: 650; margin-top: 28px; }
+    .picker-result textarea { width: 100%; min-height: 190px; resize: vertical; font: inherit; font-size: 15px; padding: 16px; border: 1px solid #adb5a9; border-radius: 10px; margin-top: 10px; color: #151815; background: #fff; }
+    .picker-result textarea:focus-visible { outline: 3px solid #608d22; outline-offset: 3px; }
+    @media (max-width: 520px) { .picker { padding: 22px; } .picker-options { grid-template-columns: 1fr; } }
     .nav-links a.button { color: var(--accent-ink); }
     @media (max-width: 820px) {
       .demo-layout { grid-template-columns: 1fr; }
@@ -598,9 +615,9 @@
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
             Обсудить мою задачу
           </a>
-          <a class="button secondary" href="#work">
+          <a class="button secondary" href="#pick-solution">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
-            Посмотреть работы
+            Подобрать решение
           </a>
         </div>
       </div>
@@ -856,6 +873,68 @@
       </div>
     </section>
 
+    <section class="section light" id="pick-solution" aria-labelledby="picker-title">
+      <div class="shell">
+        <p class="section-label">От вашей задачи к решению</p>
+        <h2 class="section-title" id="picker-title">Что вы хотите упростить?</h2>
+        <p class="section-intro">Ответьте на три вопроса. Подберём отправную точку и подготовим текст обращения — его можно отредактировать перед отправкой.</p>
+        <noscript><p>Для подбора решения включите JavaScript или <a href="https://t.me/Ekater5rina" target="_blank" rel="noopener noreferrer">напишите мне в Telegram</a>.</p></noscript>
+        <form class="picker" id="solution-picker">
+          <div id="picker-questions">
+            <p class="picker-step" id="picker-step">Вопрос 1 из 3</p>
+            <progress id="picker-progress" value="1" max="3" aria-label="Ход подбора решения"></progress>
+            <fieldset data-picker-step="0">
+              <legend tabindex="-1">Что сейчас требует ручной работы?</legend>
+              <div class="picker-options">
+                <label class="picker-option"><input type="radio" name="task" value="report">Собрать и проверить отчёт</label>
+                <label class="picker-option"><input type="radio" name="task" value="calculator">Рассчитать заказ или стоимость</label>
+                <label class="picker-option"><input type="radio" name="task" value="control">Контролировать заказы и задачи</label>
+                <label class="picker-option"><input type="radio" name="task" value="dashboard">Видеть показатели в одном месте</label>
+                <label class="picker-option"><input type="radio" name="task" value="integration">Связать программы и уведомления</label>
+                <label class="picker-option"><input type="radio" name="task" value="other">Другая задача — хочу обсудить</label>
+              </div>
+            </fieldset>
+            <fieldset data-picker-step="1" hidden>
+              <legend tabindex="-1">Где сейчас находятся данные?</legend>
+              <p class="demo-note">Можно выбрать несколько вариантов.</p>
+              <div class="picker-options">
+                <label class="picker-option"><input type="checkbox" name="sources" value="1С">1С</label>
+                <label class="picker-option"><input type="checkbox" name="sources" value="Excel">Excel</label>
+                <label class="picker-option"><input type="checkbox" name="sources" value="Google Таблицы">Google Таблицы</label>
+                <label class="picker-option"><input type="checkbox" name="sources" value="CRM или другая программа">CRM или другая программа</label>
+                <label class="picker-option"><input type="checkbox" name="sources" value="Переписка и документы">Переписка и документы</label>
+                <label class="picker-option"><input type="checkbox" name="sources" value="Нужно определить">Пока не знаю — нужна помощь</label>
+              </div>
+            </fieldset>
+            <fieldset data-picker-step="2" hidden>
+              <legend tabindex="-1">Кто будет пользоваться решением?</legend>
+              <div class="picker-options">
+                <label class="picker-option"><input type="radio" name="audience" value="Только я">Только я</label>
+                <label class="picker-option"><input type="radio" name="audience" value="Сотрудники команды">Сотрудники команды</label>
+                <label class="picker-option"><input type="radio" name="audience" value="Руководитель и сотрудники">Руководитель и сотрудники</label>
+                <label class="picker-option"><input type="radio" name="audience" value="Клиенты или партнёры">Клиенты или партнёры</label>
+                <label class="picker-option"><input type="radio" name="audience" value="Нужно определить">Пока не определились</label>
+              </div>
+            </fieldset>
+            <p class="demo-error" id="picker-error" role="alert"></p>
+            <div class="demo-actions"><button class="button secondary" type="button" id="picker-back" hidden>Назад</button><button class="button" type="submit" id="picker-next">Далее</button></div>
+          </div>
+          <div class="picker-result" id="picker-result" hidden>
+            <p class="section-label">С чего можно начать</p>
+            <h3 id="picker-recommendation" tabindex="-1"></h3>
+            <p id="picker-description"></p>
+            <a id="picker-example" href="#work">Посмотреть пример →</a>
+            <p class="demo-note">Это предварительный вариант. Состав функций, сроки и стоимость определим после обсуждения вашей задачи.</p>
+            <label for="picker-message">Ваше обращение — можно изменить</label>
+            <textarea id="picker-message" maxlength="2000" aria-describedby="picker-privacy"></textarea>
+            <p class="demo-note" id="picker-privacy">Ответы используются только в этом браузере. При открытии чата текст передаётся в Telegram как черновик; сообщение отправляете вы сами.</p>
+            <div class="demo-actions"><a class="button" id="picker-telegram" href="https://t.me/Ekater5rina" target="_blank" rel="noopener noreferrer">Открыть чат в Telegram</a><button class="button secondary" type="button" id="picker-copy">Скопировать текст</button><button class="button secondary" type="button" id="picker-edit">Изменить ответы</button></div>
+            <p class="demo-note" id="picker-copy-status" role="status"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+
     <section class="section light" id="start" aria-labelledby="start-title">
       <div class="shell">
         <p class="section-label">Небольшая задача — понятный результат</p>
@@ -967,6 +1046,7 @@
 
   <script src="demo-core.js" defer></script>
   <script src="demo.js" defer></script>
+  <script src="solution-picker.js" defer></script>
   <script>
     const MENU_ICON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>';
     const CLOSE_ICON = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>';
