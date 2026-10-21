@@ -466,6 +466,16 @@
     .faq-list details:last-child { border-bottom: 1px solid var(--line); }
     .faq-list summary { cursor: pointer; font-size: 21px; font-weight: 650; }
     .faq-list p { color: var(--muted); max-width: 760px; }
+    .housing-preview { margin: 44px 0 0; }
+    .housing-preview a { display: block; border-radius: 14px; overflow: hidden; background: #fff; }
+    .housing-preview img { width: 100%; height: auto; }
+    .housing-preview figcaption { margin-top: 14px; color: var(--muted); font-size: 14px; }
+    .housing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 44px; }
+    .housing-card { border-top: 1px solid var(--line); padding-top: 24px; }
+    .housing-card h3 { font-size: 23px; line-height: 1.25; margin: 0 0 14px; }
+    .housing-card p { color: var(--muted); margin: 0; }
+    .housing-cta { margin-top: 36px; }
+    @media (max-width: 820px) { .housing-grid { grid-template-columns: 1fr; } }
     .picker { margin-top: 44px; padding: 32px; border: 1px solid #cdd2ca; border-radius: 16px; background: #fff; max-width: 960px; scroll-margin-top: calc(var(--header-height) + 24px); }
     .picker progress { width: 100%; height: 8px; accent-color: #608d22; margin: 8px 0 28px; }
     .picker fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
@@ -864,6 +874,28 @@
         </div>
         <p class="section-intro">В рабочем решении можно настроить обработку ваших Excel-файлов, выгрузок из учётной системы и Google Таблиц. Сначала согласуем структуру данных и контрольные правила.</p>
         <div class="demo-actions"><a class="button" href="https://t.me/Ekater5rina?text=Здравствуйте!%20Хочу%20автоматизировать%20сборку%20отчёта." target="_blank" rel="noopener noreferrer">Обсудить автоматизацию отчёта</a></div>
+      </div>
+    </section>
+
+    <section class="section dark" id="tsj" aria-labelledby="tsj-title">
+      <div class="shell">
+        <p class="section-label">Для ТСЖ и управляющих организаций</p>
+        <h2 class="section-title" id="tsj-title">Председателю — видеть ситуацию по дому. Бухгалтеру — меньше собирать вручную.</h2>
+        <p class="section-intro">Разрабатываю приложения и автоматизацию для ТСЖ и управляющих организаций: объединяю данные из учётных программ и таблиц, настраиваю отчёты, контроль заявок и уведомления.</p>
+        <figure class="housing-preview">
+          <a href="dashboard-tsj.png" target="_blank" rel="noopener noreferrer" aria-label="Открыть пример дашборда ТСЖ в полном размере">
+            <img src="dashboard-tsj.png" alt="Концепт дашборда ТСЖ на вымышленных данных: начислено 1 200 000 рублей, поступило 1 080 000, долг 360 000, смета и факт расходов, 12 открытых заявок." width="1586" height="992" loading="lazy">
+          </a>
+          <figcaption>Пример того, как может выглядеть решение. Концепт интерфейса; все названия, суммы и заявки вымышлены. Нажмите на изображение, чтобы рассмотреть его в полном размере.</figcaption>
+        </figure>
+        <div class="housing-grid">
+          <article class="housing-card"><h3>Отчёт снова собирается из нескольких таблиц?</h3><p>Создам инструмент для сбора поступлений и расходов, сравнения со сметой и подготовки понятного отчёта для правления и собственников.</p></article>
+          <article class="housing-card"><h3>Непонятно, какие платежи поступили и где задолженность?</h3><p>Разработаю дашборд начислений, оплат и задолженности по согласованным данным из 1С, Excel, Google Таблиц или другой учётной программы.</p></article>
+          <article class="housing-card"><h3>Заявки жителей теряются в переписке?</h3><p>Создам реестр обращений со статусами, сроками, ответственными и уведомлениями. Можно настроить связь с Telegram-ботом.</p></article>
+          <article class="housing-card"><h3>Работы выполнены, а документы приходится искать?</h3><p>Разработаю учёт работ и подрядчиков с фотографиями, актами и историей выполнения, чтобы документы были связаны с конкретной работой.</p></article>
+        </div>
+        <p class="section-intro">Можно начать с одного отчёта «Смета — факт» или контроля заявок. Сначала разберём ваш процесс, источники данных и правила расчёта, затем согласуем состав приложения.</p>
+        <div class="housing-cta"><a class="button" href="https://t.me/Ekater5rina?text=Здравствуйте,%20Екатерина!%20Хочу%20обсудить%20разработку%20инструмента%20для%20моего%20ТСЖ%20или%20управляющей%20организации." target="_blank" rel="noopener noreferrer">Обсудить задачу моего ТСЖ</a></div>
       </div>
     </section>
 
